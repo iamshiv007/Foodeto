@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../featured/actions/userActions";
 import Profile from "../../images/Profile.png";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
 
 const Register = () => {
@@ -145,6 +145,15 @@ const Register = () => {
           >
             Sign Up
           </Button>
+
+          <Box textAlign={"center"} display={"flex"} gap={2} justifyContent="center">
+            <Text>Already have a Acount?</Text>
+            <NavLink to="/login">
+              <Text fontSize={"sm"} textColor={"tomato"}>
+                Login
+              </Text>
+            </NavLink>
+          </Box>
         </Grid>
       </form>
     </Fragment>

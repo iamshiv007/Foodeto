@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -10,7 +11,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../featured/actions/userActions";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
 
 const Login = () => {
@@ -39,7 +40,7 @@ const Login = () => {
 
   return (
     <Fragment>
-      <MetaData title='Login to -- Foodeto' />
+      <MetaData title="Login to -- Foodeto" />
       <form onSubmit={handleLogin} action="" method="post">
         <Grid
           gap={3}
@@ -57,7 +58,6 @@ const Login = () => {
           >
             Login to Foodeto
           </Text>
-
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <Input onChange={collectData} type="email" name="email" />
@@ -66,7 +66,6 @@ const Login = () => {
             <FormLabel>Password</FormLabel>
             <Input onChange={collectData} type="password" name="password" />
           </FormControl>
-
           <Button
             type="submit"
             size="sm"
@@ -76,6 +75,19 @@ const Login = () => {
           >
             Log In
           </Button>
+          <Box
+            textAlign={"center"}
+            display={"flex"}
+            gap={2}
+            justifyContent="center"
+          >
+            <Text>Don't have any acount?</Text>
+            <NavLink to="/signup">
+              <Text fontSize={"sm"} textColor={"tomato"}>
+                Signup
+              </Text>
+            </NavLink>
+          </Box>{" "}
         </Grid>
       </form>
     </Fragment>

@@ -64,7 +64,7 @@ const Profile = () => {
               Joined At
             </Text>
             <Text textAlign={"center"}>
-              {String(user?.createdAt).substr(0, 10)}
+              {String(user?.createdAt).substr(0, 10) || ""}
             </Text>
           </div>
           <div>
