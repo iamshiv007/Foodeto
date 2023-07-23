@@ -6,23 +6,30 @@ const sendToken = require('../utils/jwtToken')
 
 // 1 Register a User
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: "Avatars",
-        width: 150,
-        crop: "scale"
-    })
+    if (req.body.avatar) {
+        const myCloud = await cloudinary.v2.uploader.upload(req?.body?.avatar, {
+            folder: "Avatars",
+            width: 150,
+            crop: "scale"
+        })
+    }
 
     const { name, email, password } = req.body
 
-    const user = await User.create({
+    const user = await User.create(req.body.avatar ? {
         name,
         email,
         password,
         avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
+            public_id: myCloud?.public_id,
+            url: myCloud?.secure_url
         }
-    })
+    } : {
+        name,
+        email,
+        password
+    }
+    )
 
     sendToken(user, 201, res)
 })

@@ -2,6 +2,7 @@
 
 # dependencies
 /foodeto-frontend/node_modules
+/foodeto-frontend/.env
 /foodeto-backend/node_modules
 /foodeto-backend/.env
 
