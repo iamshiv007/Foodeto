@@ -13,6 +13,7 @@ import { register } from "../../featured/actions/userActions";
 import Profile from "../../images/Profile.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/metaData/MetaData";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -63,6 +64,8 @@ const Register = () => {
 
   return (
     <Fragment>
+      <MetaData title="Signup to -- Foodeto" />
+
       <form onSubmit={handleRegister} action="" method="post">
         <Grid
           gap={3}

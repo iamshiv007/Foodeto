@@ -21,6 +21,7 @@ function App() {
     <BrowserRouter>
       <ChakraProvider>
         <Routes>
+
           <Route exact element={<Login />} path='/login' />
           <Route exact element={<Register />} path='/signup' />
           <Route exact element={<Home />} path='/' />

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../featured/actions/userActions";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/metaData/MetaData";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -38,6 +39,7 @@ const Login = () => {
 
   return (
     <Fragment>
+      <MetaData title='Login to -- Foodeto' />
       <form onSubmit={handleLogin} action="" method="post">
         <Grid
           gap={3}
