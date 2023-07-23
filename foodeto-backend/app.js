@@ -66,3 +66,5 @@ process.on("unhandledRejection", (err) => {
 app.get('/', (req, res) => {
     res.send("Server Tested")
 })
+
+module.exports = app
