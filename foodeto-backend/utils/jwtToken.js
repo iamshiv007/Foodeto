@@ -1,6 +1,6 @@
 // Create Token and saving in cookie
 
-const sendToken = (user, statusCode, res) => {
+exports.sendToken = (user, statusCode, res) => {
     const token = user.getJWTToken()
 
     // options for cookie
@@ -20,4 +20,23 @@ const sendToken = (user, statusCode, res) => {
     })
 }
 
-module.exports = sendToken
+exports.sendTokenShop = (shop, statusCode, res) => {
+    const token = shop.getJWTToken()
+
+    // options for cookie
+    const options = {
+        expires: new Date(
+            Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+        ),
+        httpOnly: true,
+        sameSite: "None",
+        secure: true
+    }
+
+    res.status(statusCode).cookie('token', token, options).json({
+        success: true,
+        token,
+        shop
+    })
+
+}

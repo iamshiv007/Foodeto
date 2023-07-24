@@ -1,63 +1,64 @@
-const User = require('../models/userModel')
+const Shop = require('../models/shopModel')
 const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncError = require('..//middleware/catchAsyncErrors')
 const cloudinary = require('cloudinary')
-const { sendToken } = require('../utils/jwtToken')
+const { sendTokenShop } = require('../utils/jwtToken')
 
-// 1 Register a User
-exports.registerUser = catchAsyncError(async (req, res, next) => {
-    if (req.body.avatar) {
-        var myCloud = await cloudinary.v2.uploader.upload(req?.body?.avatar, {
-            folder: "Avatars",
-            width: 150,
+// 1 Register a Shop
+exports.registerShop = catchAsyncError(async (req, res, next) => {
+    if (req.body.shopPicture) {
+        var myCloud = await cloudinary.v2.uploader.upload(req?.body?.shopPicture, {
+            folder: "Shops",
+            width: 300,
             crop: "scale"
         })
     }
 
-    const { name, email, password, mobile } = req.body
+    const { shopName, ownerName, email, password, mobile } = req.body
 
-    const user = await User.create(req.body.avatar ? {
-        name,
+    const shop = await Shop.create(req.body.shopPicture ? {
+        shopName,
+        ownerName,
         email,
         password,
         mobile,
-        avatar: {
+        shopPicture: {
             public_id: myCloud?.public_id,
             url: myCloud?.secure_url
         }
     } : {
-        name,
+        shopName,
+        ownerName,
         email,
         password,
         mobile
     }
     )
 
-    sendToken(user, 201, res)
+    sendTokenShop(shop, 201, res)
 })
 
-// 2 Login User
-exports.loginUser = catchAsyncError(async (req, res, next) => {
+// 2 Login Shop
+exports.loginShop = catchAsyncError(async (req, res, next) => {
     const { email, password } = req.body
 
-    // Checking if user has given email and password both
+    // Checking if Shop has given email and password both
 
     if (!email || !password) {
         return next(new ErrorHandler("Please Enter email & password", 400))
     }
 
-    const user = await User.findOne({ email }).select("+password")
+    const shop = await shop.findOne({ email }).select("+password")
 
-    if (!user) {
+    if (!shop) {
         return next(new ErrorHandler("Invalid email or password", 401))
     }
 
-    const isPasswordMatched = await user.comparePassword(password)
+    const isPasswordMatched = await shop.comparePassword(password)
 
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Invalid email or password", 401))
     }
-
 
     sendToken(user, 200, res)
 })
@@ -75,12 +76,12 @@ exports.logout = catchAsyncError(async (req, res, next) => {
     })
 })
 
-// 4 Get user detail
-exports.getUserDetails = catchAsyncError(async (req, res, next) => {
-    const user = await User.findById(req.user.id)
+// 4 Get Shop detail
+exports.getShopDetails = catchAsyncError(async (req, res, next) => {
+    const shop = await Shop.findById(req.user.id)
 
     res.status(200).json({
         success: true,
-        user
+        shop
     })
 })

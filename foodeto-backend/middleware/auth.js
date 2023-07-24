@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+const Shop = require('../models/shopModel')
 const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncError = require('./catchAsyncErrors')
 const jwt = require('jsonwebtoken')
@@ -12,6 +13,18 @@ exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
 
     const decodedData = await jwt.verify(token, process.env.JWT_SECRET)
     req.user = await User.findById(decodedData.id)
+    next()
+})
+
+exports.isAuthenticatedShop = catchAsyncError(async (req, res, next) => {
+    const { token } = req.cookies
+
+    if (!token) {
+        return next(new ErrorHandler("Please login to access this resource", 401))
+    }
+
+    const decodedData = await jwt.verify(token, process.env.JWT_SECRET)
+    req.shop = await Shop.findById(decodedData.id)
     next()
 })
 
