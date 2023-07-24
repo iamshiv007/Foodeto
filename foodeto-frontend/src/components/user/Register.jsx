@@ -47,17 +47,17 @@ const Register = () => {
       toast.success("Registered Successfully");
       navigate("/");
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [isAuthenticated, navigate]);
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const { name, email, password } = formData;
+    const { name, email, password, mobile } = formData;
     const myForm = new FormData();
     myForm.append("name", name);
     myForm.append("email", email);
     myForm.append("password", password);
+    myForm.append("mobile", mobile);
     myForm.append("avatar", avatar);
     dispatch(register(myForm));
   };
@@ -90,6 +90,10 @@ const Register = () => {
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <Input onChange={collectData} type="email" name="email" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Mobile</FormLabel>
+            <Input onChange={collectData} type="Number" name="mobile" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
@@ -146,8 +150,13 @@ const Register = () => {
             Sign Up
           </Button>
 
-          <Box textAlign={"center"} display={"flex"} gap={2} justifyContent="center">
-            <Text>Already have a Acount?</Text>
+          <Box
+            textAlign={"center"}
+            display={"flex"}
+            gap={2}
+            justifyContent="center"
+          >
+            <Text>Already have an acount?</Text>
             <NavLink to="/login">
               <Text fontSize={"sm"} textColor={"tomato"}>
                 Login

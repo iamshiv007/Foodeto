@@ -1,11 +1,21 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Toast } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../../featured/actions/userActions";
 
 const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/login");
+    Toast.success("Logout Successfully");
+  };
 
   return (
     <Fragment>
@@ -13,8 +23,7 @@ const Header = () => {
         display={"flex"}
         justifyContent={"space-between"}
         padding={"10px 30px"}
-        background={"black"}
-        backdropBlur={"0.5"}
+        background={"rgba(0, 0, 0, 0.4)"}
       >
         <Box>
           <NavLink to="/">
@@ -66,6 +75,7 @@ const Header = () => {
               alignItems={"center"}
               color={"white"}
               cursor={"pointer"}
+              onClick={logoutHandler}
             >
               <FaUserCircle /> Logout
             </Box>
