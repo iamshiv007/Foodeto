@@ -5,7 +5,7 @@ const user = require("./userRoute")
 router.use('/', user)
 
 // Shop
-const shop = require("./shopRoute")
-router.use('/', shop)
+const partner = require("./partnerRoute")
+router.use('/', partner)
 
 module.exports = router

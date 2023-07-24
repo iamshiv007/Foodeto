@@ -4,20 +4,20 @@ const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
 
-const shopSchema = mongoose.Schema({
+const partnerSchema = mongoose.Schema({
+    shopName: {
+        type: String,
+        required: true
+    },
+    partnerName: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: [true, "Please Enter Your Email"],
         unique: true,
         validate: [validator.isEmail, "Please Enter a valid Email"]
-    },
-    shopName: {
-        type: String,
-        required: true
-    },
-    ownerName: {
-        type: String,
-        required: true
     },
     shopPicture: [{
         public_id: {
@@ -40,7 +40,7 @@ const shopSchema = mongoose.Schema({
 })
 
 // Password hashing
-shopSchema.pre('save', async function (next) {
+partnerSchema.pre('save', async function (next) {
     if (!this.isModified("password")) {
         next()
     }
@@ -49,19 +49,19 @@ shopSchema.pre('save', async function (next) {
 })
 
 // jwt token
-shopSchema.methods.getJWTToken = function () {
+partnerSchema.methods.getJWTToken = function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE
     })
 }
 
 // Generating Password Reset Token
-shopSchema.methods.getResetPasswordToken = function () {
+partnerSchema.methods.getResetPasswordToken = function () {
 
     // Generating Token
     const resetToken = crypto.randomBytes(20).toString('hex')
 
-    // Hashing and adding resetPasswordToken to shopSchema
+    // Hashing and adding resetPasswordToken to partnerSchema
     this.resetPasswordToken = crypto
         .createHash('sha256')
         .update(resetToken)
@@ -72,8 +72,8 @@ shopSchema.methods.getResetPasswordToken = function () {
     return resetToken
 }
 
-shopSchema.methods.comparePassword = async function (password) {
+partnerSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
-module.exports = mongoose.model('Shop', shopSchema)
+module.exports = mongoose.model('Partner', partnerSchema)

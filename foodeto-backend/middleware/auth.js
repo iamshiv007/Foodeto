@@ -1,5 +1,5 @@
 const User = require('../models/userModel')
-const Shop = require('../models/shopModel')
+const Partner = require('../models/partnerModel')
 const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncError = require('./catchAsyncErrors')
 const jwt = require('jsonwebtoken')
@@ -16,7 +16,7 @@ exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
     next()
 })
 
-exports.isAuthenticatedShop = catchAsyncError(async (req, res, next) => {
+exports.isAuthenticatedPartner = catchAsyncError(async (req, res, next) => {
     const { token } = req.cookies
 
     if (!token) {
@@ -24,7 +24,7 @@ exports.isAuthenticatedShop = catchAsyncError(async (req, res, next) => {
     }
 
     const decodedData = await jwt.verify(token, process.env.JWT_SECRET)
-    req.shop = await Shop.findById(decodedData.id)
+    req.partner = await Partner.findById(decodedData.id)
     next()
 })
 
