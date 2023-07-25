@@ -33,7 +33,7 @@ const Profile = () => {
             borderColor="gray.200"
             w="114px"
             h="114px"
-            src={user?.avatar[0].url ? user?.avatar[0].url : ProfileImage}
+            src={user?.avatar[0]?.url ? user?.avatar[0]?.url : ProfileImage}
           />
 
           <Button colorScheme="teal" paddingX={"30px"} size={"sm"}>

@@ -9,30 +9,30 @@ import {
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../featured/actions/userActions";
-import Profile from "../../images/Profile.png";
+import Shop from "../../images/shop.png";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
+import { register } from "../../featured/partnerActions/partnerActions";
 
-const Register = () => {
+const PartnerRegister = () => {
   const [formData, setFormData] = useState({});
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(Profile);
+  const [shopImage, setShopImage] = useState("");
+  const [shopImagePreview, setShopImagePreview] = useState(Shop);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isPartner, loading } = useSelector((state) => state.authPartner);
 
   const collectData = (e) => {
-    if (e.target.name === "avatar") {
+    if (e.target.name === "shopImage") {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
+          setShopImagePreview(reader.result);
+          setShopImage(reader.result);
         }
       };
 
@@ -43,32 +43,46 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isPartner) {
       toast.success("Registered Successfully");
-      navigate("/");
+      navigate("/dashboard");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isPartner, navigate]);
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const { name, email, password, mobile, confirmPassword } = formData;
+    const {
+      partnerName,
+      shopName,
+      email,
+      password,
+      mobile,
+      city,
+      state,
+      street,
+      confirmPassword,
+    } = formData;
 
     if (password !== confirmPassword) {
       return toast.error("Password does not match");
     }
     const myForm = new FormData();
-    myForm.append("name", name);
+    myForm.append("partnerName", partnerName);
+    myForm.append("shopName", shopName);
     myForm.append("email", email);
     myForm.append("password", password);
     myForm.append("mobile", mobile);
-    myForm.append("avatar", avatar);
+    myForm.append("city", city);
+    myForm.append("state", state);
+    myForm.append("street", street);
+    myForm.append("shopImage", shopImage);
     dispatch(register(myForm));
   };
 
   return (
     <Fragment>
-      <MetaData title="Signup to -- Foodeto" />
+      <MetaData title="Signup as Partner" />
 
       <form onSubmit={handleRegister} action="" method="post">
         <Grid
@@ -85,11 +99,15 @@ const Register = () => {
             color="tomato"
             fontSize="2xl"
           >
-            Register to Foodeto
+            Register as a Partner
           </Text>
           <FormControl isRequired>
-            <FormLabel>Name</FormLabel>
-            <Input onChange={collectData} type="text" name="name" />
+            <FormLabel>Partner Name</FormLabel>
+            <Input onChange={collectData} type="text" name="partnerName" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Shop Name</FormLabel>
+            <Input onChange={collectData} type="text" name="shopName" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
@@ -98,6 +116,18 @@ const Register = () => {
           <FormControl isRequired>
             <FormLabel>Mobile</FormLabel>
             <Input onChange={collectData} type="Number" name="mobile" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>City</FormLabel>
+            <Input onChange={collectData} type="text" name="city" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>State</FormLabel>
+            <Input onChange={collectData} type="text" name="state" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Street</FormLabel>
+            <Input onChange={collectData} type="text" name="street" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
@@ -117,28 +147,28 @@ const Register = () => {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <FormLabel>Avatar</FormLabel>
+            <FormLabel>Shop Image</FormLabel>
             <Input
               onChange={collectData}
               hidden
-              id="avatar"
+              id="shopImage"
               type="file"
-              name="avatar"
+              name="shopImage"
               accept="image/*"
             />
-            <label htmlFor="avatar">
+            <label htmlFor="shopImage">
               <Box
-                borderRadius={"100%"}
+                borderRadius={"10px%"}
                 border="1px"
                 borderColor="gray.200"
-                w="64px"
-                h="64px"
+                w="100px"
+                h="100px"
               >
                 <img
                   cursor={"pointer"}
                   w="100%"
-                  src={avatarPreview}
-                  alt="Dan Abramov"
+                  src={shopImagePreview}
+                  alt="Shop"
                 />
               </Box>
             </label>
@@ -161,9 +191,9 @@ const Register = () => {
             justifyContent="center"
           >
             <Text>Already have an acount?</Text>
-            <NavLink to="/login">
+            <NavLink to="/partner/login">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Login
+                Log In for Partner
               </Text>
             </NavLink>
           </Box>
@@ -173,10 +203,10 @@ const Register = () => {
             gap={2}
             justifyContent="center"
           >
-            <Text>Register as a Partner</Text>
-            <NavLink to="/partner/signup">
+            <Text>Register as an User?</Text>
+            <NavLink to="/signup">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Sign Up
+                Signup
               </Text>
             </NavLink>
           </Box>
@@ -186,4 +216,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default PartnerRegister;

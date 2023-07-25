@@ -2,7 +2,6 @@ import {
   Box,
   Text,
   useDisclosure,
-  Button,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -10,24 +9,27 @@ import {
   DrawerHeader,
   DrawerBody,
   IconButton,
+  Button,
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logout } from "../../../featured/actions/userActions";
 import { toast } from "react-toastify";
-import { FiMenu, FiLogOut } from "react-icons/fi";
+import { FiMenu, FiLogOut, FiLogIn } from "react-icons/fi";
+import { AiTwotoneHome } from "react-icons/ai";
 
 const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logout());
-    navigate("/login");
+    onClose();
     toast.success("Logout Successfully");
   };
 
@@ -67,34 +69,38 @@ const Header = () => {
             </Box>
           </NavLink>
 
-          <NavLink to="/profile">
-            <Box
-              _hover={{ background: "#2e2e2e;" }}
-              borderRadius={"10px"}
-              padding={"4px 10px"}
-              display={"flex"}
-              gap={2}
-              alignItems={"center"}
-              color={"white"}
-            >
-              <FaUserCircle /> Profile
-            </Box>
-          </NavLink>
+          {isAuthenticated && (
+            <NavLink to="/profile">
+              <Box
+                _hover={{ background: "#2e2e2e;" }}
+                borderRadius={"10px"}
+                padding={"4px 10px"}
+                display={"flex"}
+                gap={2}
+                alignItems={"center"}
+                color={"white"}
+              >
+                <FaUserCircle /> Profile
+              </Box>
+            </NavLink>
+          )}
 
           {isAuthenticated ? (
-            <Box
-              _hover={{ background: "#2e2e2e;" }}
-              borderRadius={"10px"}
-              padding={"4px 10px"}
-              display={"flex"}
-              gap={2}
-              alignItems={"center"}
-              color={"white"}
-              cursor={"pointer"}
-              onClick={logoutHandler}
-            >
-              <FiLogOut /> Logout
-            </Box>
+            <Button>
+              <Box
+                _hover={{ background: "#2e2e2ez" }}
+                borderRadius={"10px"}
+                padding={"4px 10px"}
+                display={"flex"}
+                gap={2}
+                alignItems={"center"}
+                color={"white"}
+                cursor={"pointer"}
+                onClick={logoutHandler}
+              >
+                <FiLogOut /> Logout
+              </Box>
+            </Button>
           ) : (
             <NavLink to="/login">
               <Box
@@ -106,21 +112,25 @@ const Header = () => {
                 alignItems={"center"}
                 color={"white"}
               >
-                <FaUserCircle /> Login
+                <FiLogIn /> Login
               </Box>
             </NavLink>
           )}
         </Box>
       </Box>
-      <MobileNavbar logoutHandler={logoutHandler} />
+      <MobileNavbar
+        logoutHandler={logoutHandler}
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+      />
     </Fragment>
   );
 };
 
 export default Header;
 
-const MobileNavbar = ({ logoutHandler }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
   const btnRef = React.useRef();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -154,6 +164,10 @@ const MobileNavbar = ({ logoutHandler }) => {
             <NavLink to="/">
               <Box>
                 <Text
+                  _hover={{
+                    transform: "scale(1.1)",
+                    transition: "all 0.1s",
+                  }}
                   fontSize={"xl"}
                   fontStyle={"italic"}
                   fontWeight={"bold"}
@@ -170,6 +184,24 @@ const MobileNavbar = ({ logoutHandler }) => {
             <Box display={"flex"} flexDirection={"column"} gap={3}>
               <NavLink to="/">
                 <Box
+                  _hover={{
+                    transform: "scale(1.1)",
+                    transition: "all 0.1s",
+                  }}
+                  padding={"4px 10px"}
+                  display={"flex"}
+                  gap={2}
+                  alignItems={"center"}
+                >
+                  <AiTwotoneHome /> Home
+                </Box>
+              </NavLink>
+              <NavLink to="/">
+                <Box
+                  _hover={{
+                    transform: "scale(1.1)",
+                    transition: "all 0.1s",
+                  }}
                   padding={"4px 10px"}
                   display={"flex"}
                   gap={2}
@@ -179,19 +211,29 @@ const MobileNavbar = ({ logoutHandler }) => {
                 </Box>
               </NavLink>
 
-              <NavLink to="/profile">
-                <Box
-                  padding={"4px 10px"}
-                  display={"flex"}
-                  gap={2}
-                  alignItems={"center"}
-                >
-                  <FaUserCircle /> Profile
-                </Box>
-              </NavLink>
+              {isAuthenticated && (
+                <NavLink to="/profile">
+                  <Box
+                    _hover={{
+                      transform: "scale(1.1)",
+                      transition: "all 0.1s",
+                    }}
+                    padding={"4px 10px"}
+                    display={"flex"}
+                    gap={2}
+                    alignItems={"center"}
+                  >
+                    <FaUserCircle /> Profile
+                  </Box>
+                </NavLink>
+              )}
 
               {isAuthenticated ? (
                 <Box
+                  _hover={{
+                    transform: "scale(1.1)",
+                    transition: "all 0.1s",
+                  }}
                   padding={"4px 10px"}
                   display={"flex"}
                   gap={2}
@@ -204,24 +246,23 @@ const MobileNavbar = ({ logoutHandler }) => {
               ) : (
                 <NavLink to="/login">
                   <Box
+                    _hover={{
+                      transform: "scale(1.1)",
+                      transition: "all 0.1s",
+                    }}
                     padding={"4px 10px"}
                     display={"flex"}
                     gap={2}
                     alignItems={"center"}
                   >
-                    <FaUserCircle /> Login
+                    <FiLogIn /> Login
                   </Box>
                 </NavLink>
               )}
             </Box>
           </DrawerBody>
 
-          {/* <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
-          </DrawerFooter> */}
+
         </DrawerContent>
       </Drawer>
     </>

@@ -9,17 +9,17 @@ import {
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../featured/actions/userActions";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
+import { login } from "../../featured/partnerActions/partnerActions";
 
-const Login = () => {
+const PartnerLogin = () => {
   const [formData, setFormData] = useState({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isPartner, loading } = useSelector((state) => state.authPartner);
 
   const collectData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,16 +31,16 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isPartner) {
       toast.success("Logged in successfully");
-      navigate("/");
+      navigate("/dashboard");
     }
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isPartner]);
 
   return (
     <Fragment>
-      <MetaData title="Login to -- Foodeto" />
+      <MetaData title="Login as Partner" />
       <form onSubmit={handleLogin} action="" method="post">
         <Grid
           gap={3}
@@ -56,10 +56,10 @@ const Login = () => {
             color="tomato"
             fontSize="2xl"
           >
-            Login to Foodeto
+            Login as a Partner
           </Text>
           <FormControl isRequired>
-            <FormLabel>Email</FormLabel>
+            <FormLabel fontSize={"16px"}>Email</FormLabel>
             <Input onChange={collectData} type="email" name="email" />
           </FormControl>
           <FormControl isRequired>
@@ -82,9 +82,9 @@ const Login = () => {
             justifyContent="center"
           >
             <Text>Don't have any acount?</Text>
-            <NavLink to="/signup">
+            <NavLink to="/partner/signup">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Signup
+                Signup for Partner
               </Text>
             </NavLink>
           </Box>{" "}
@@ -94,10 +94,10 @@ const Login = () => {
             gap={2}
             justifyContent="center"
           >
-            <Text>Are you a zomato partner?</Text>
-            <NavLink to="/partner/login">
+            <Text>Not a Partner?</Text>
+            <NavLink to="/login">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Login as Partner
+                Login as User
               </Text>
             </NavLink>
           </Box>{" "}
@@ -107,4 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default PartnerLogin;
