@@ -19,7 +19,7 @@ const partnerSchema = mongoose.Schema({
         unique: true,
         validate: [validator.isEmail, "Please Enter a valid Email"]
     },
-    shopPicture: [{
+    shopImage: [{
         public_id: {
             type: String,
             required: true
@@ -30,6 +30,18 @@ const partnerSchema = mongoose.Schema({
         }
     }],
     mobile: {
+        type: Number,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    street: {
         type: String,
         required: true
     },

@@ -20,8 +20,8 @@ exports.sendToken = (user, statusCode, res) => {
     })
 }
 
-exports.sendTokenPartner = (shop, statusCode, res) => {
-    const token = shop.getJWTToken()
+exports.sendTokenPartner = (partner, statusCode, res) => {
+    const token = partner.getJWTToken()
 
     // options for cookie
     const options = {
@@ -36,7 +36,7 @@ exports.sendTokenPartner = (shop, statusCode, res) => {
     res.status(statusCode).cookie('token', token, options).json({
         success: true,
         token,
-        shop
+        partner
     })
 
 }

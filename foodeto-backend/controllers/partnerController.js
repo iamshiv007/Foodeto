@@ -6,8 +6,8 @@ const { sendTokenPartner } = require('../utils/jwtToken')
 
 // 1 Register a Partner
 exports.registerPartner = catchAsyncError(async (req, res, next) => {
-    if (req.body.shopPicture) {
-        var myCloud = await cloudinary.v2.uploader.upload(req?.body?.shopPicture, {
+    if (req.body.shopImage) {
+        var myCloud = await cloudinary.v2.uploader.upload(req?.body?.shopImage, {
             folder: "Shops",
             width: 300,
             crop: "scale"
@@ -16,16 +16,16 @@ exports.registerPartner = catchAsyncError(async (req, res, next) => {
 
     const { shopName, partnerName, email, password, mobile } = req.body
 
-    const partner = await Partner.create(req.body.shopPicture ? {
+    const partner = await Partner.create(req.body.shopImage ? {
         shopName,
         partnerName,
         email,
         password,
         mobile,
-        shopPicture: {
+        shopImage: [{
             public_id: myCloud?.public_id,
             url: myCloud?.secure_url
-        }
+        }]
     } : {
         shopName,
         partnerName,
