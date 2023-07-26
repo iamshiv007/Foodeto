@@ -14,7 +14,7 @@ import {
 import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../featured/partnerActions/partnerActions";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FiMenu } from "react-icons/fi";
 
@@ -24,9 +24,12 @@ const SideBar = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const navigate = useNavigate();
+
   const logoutHandler = () => {
     dispatch(logout());
     toast.success("Logout Successfully");
+    navigate("/");
   };
 
   return (

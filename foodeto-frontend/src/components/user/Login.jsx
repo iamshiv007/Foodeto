@@ -94,7 +94,7 @@ const Login = () => {
             gap={2}
             justifyContent="center"
           >
-            <Text>Are you a zomato partner?</Text>
+            <Text>Are you a foodeto partner?</Text>
             <NavLink to="/partner/login">
               <Text fontSize={"sm"} textColor={"tomato"}>
                 Login as Partner
