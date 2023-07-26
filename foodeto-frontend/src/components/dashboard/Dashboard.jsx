@@ -1,24 +1,22 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import SideBar from "../partnerLayout/SideBar";
 import MetaData from "../layout/metaData/MetaData";
 import { useSelector } from "react-redux";
 import { Box, Text } from "@chakra-ui/react";
 import Shop from "../../images/shop.png";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
 
 const Dashboard = () => {
-  const { partner, isPartner, loading } = useSelector(
-    (state) => state.authPartner
-  );
+  const { partner, loading } = useSelector((state) => state.authPartner);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isPartner) {
-      navigate("/");
-    }
-  }, [isPartner]);
+  // useEffect(() => {
+  //   if (!isPartner && !loading) {
+  //     // navigate("/");
+  //   }
+  // }, [isPartner, loading]);
 
   return (
     <Fragment>
