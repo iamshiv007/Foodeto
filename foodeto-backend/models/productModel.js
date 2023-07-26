@@ -1,16 +1,17 @@
 const mongoose = require("mongoose")
 
 const productSchema = mongoose.Schema({
-    shop: {
+    partner: {
         type: mongoose.Schema.ObjectId,
         required: true,
-        ref:"Shop"
+        ref: "Partner"
     },
     productName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    image: [{
+    productImage: [{
         public_id: {
             type: String,
             required: true
@@ -37,6 +38,14 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true,
         default: "Available"
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    pieces: {
+        type: Number,
+        required: true
     }
 })
 

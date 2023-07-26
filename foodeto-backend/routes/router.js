@@ -8,4 +8,8 @@ router.use('/', user)
 const partner = require("./partnerRoute")
 router.use('/', partner)
 
+// Product
+const product = require("./productRoute")
+router.use('/', product)
+
 module.exports = router

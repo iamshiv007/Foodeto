@@ -14,7 +14,7 @@ exports.registerPartner = catchAsyncError(async (req, res, next) => {
         })
     }
 
-    const { shopName, partnerName, email, password, mobile } = req.body
+    const { shopName, partnerName, email, password, mobile, city, state, street } = req.body
 
     const partner = await Partner.create(req.body.shopImage ? {
         shopName,
@@ -22,6 +22,9 @@ exports.registerPartner = catchAsyncError(async (req, res, next) => {
         email,
         password,
         mobile,
+        city,
+        state,
+        street,
         shopImage: [{
             public_id: myCloud?.public_id,
             url: myCloud?.secure_url
@@ -31,7 +34,10 @@ exports.registerPartner = catchAsyncError(async (req, res, next) => {
         partnerName,
         email,
         password,
-        mobile
+        mobile,
+        city,
+        state,
+        street
     }
     )
 
