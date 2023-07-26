@@ -90,6 +90,7 @@ const PartnerRegister = () => {
           alignItems="center"
           justifyContent="center"
           templateColumns={{ base: "90%", md: "40%" }}
+          paddingBottom={"10px"}
         >
           <Text
             colorScheme="teal"

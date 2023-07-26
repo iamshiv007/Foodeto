@@ -15,7 +15,15 @@ const Dashboard = () => {
       <Box display={"flex"}>
         <SideBar />
 
-        <Box minHeight={'100vh'} display={"flex"} flexDir={"column"} justifyContent={'center'} alignItems={'center'} width='auto' padding={"20px 10px"}>
+        <Box
+          minHeight={"100vh"}
+          display={"flex"}
+          flexDir={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width="auto"
+          padding={"20px 10px"}
+        >
           <Box display={"flex"}>
             <Box
               borderRadius={"10px"}
@@ -38,10 +46,13 @@ const Dashboard = () => {
                 {partner?.shopName}
               </Text>
               <Text padding={"10px"}>Owner : {partner?.partnerName}</Text>
+              <Text padding={"10px"}>
+                Address : {partner?.adress}, {partner?.city}, {partner?.state}
+              </Text>
             </Box>
           </Box>
 
-          <Box gap='3' display={"flex"} paddingTop={"20px"}>
+          <Box gap="3" display={"flex"} paddingTop={"20px"}>
             <Box>
               <Box
                 background={"gray"}

@@ -11,10 +11,10 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import { logout } from "../../featured/partnerActions/partnerActions";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FiMenu } from "react-icons/fi";
 
@@ -22,22 +22,12 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  const { isPartner } = useSelector((state) => state.authPartner);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logout());
     toast.success("Logout Successfully");
   };
-
-  useEffect(() => {
-    if (!isPartner) {
-      navigate("/partner/login");
-    }
-  }, [isPartner, navigate]);
 
   return (
     <Fragment>
@@ -198,6 +188,9 @@ const MobileSideBar = ({ isOpen, onOpen, onClose, logoutHandler }) => {
           aria-label="Call Sage"
           fontSize="20px"
           icon={<FiMenu />}
+          position={"fixed"}
+          right={"15px"}
+          top="15px"
         />
       </Box>
       <Drawer

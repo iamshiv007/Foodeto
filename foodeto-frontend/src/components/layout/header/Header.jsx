@@ -9,7 +9,6 @@ import {
   DrawerHeader,
   DrawerBody,
   IconButton,
-  Button,
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
@@ -86,21 +85,19 @@ const Header = () => {
           )}
 
           {isAuthenticated ? (
-            <Button>
-              <Box
-                _hover={{ background: "#2e2e2ez" }}
-                borderRadius={"10px"}
-                padding={"4px 10px"}
-                display={"flex"}
-                gap={2}
-                alignItems={"center"}
-                color={"white"}
-                cursor={"pointer"}
-                onClick={logoutHandler}
-              >
-                <FiLogOut /> Logout
-              </Box>
-            </Button>
+            <Box
+              _hover={{ background: "#2e2e2ez" }}
+              borderRadius={"10px"}
+              padding={"4px 10px"}
+              display={"flex"}
+              gap={2}
+              alignItems={"center"}
+              color={"white"}
+              cursor={"pointer"}
+              onClick={logoutHandler}
+            >
+              <FiLogOut /> Logout
+            </Box>
           ) : (
             <NavLink to="/login">
               <Box
@@ -261,8 +258,6 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
               )}
             </Box>
           </DrawerBody>
-
-
         </DrawerContent>
       </Drawer>
     </>
