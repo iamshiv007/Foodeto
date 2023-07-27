@@ -13,6 +13,7 @@ import PartnerRegister from './components/partner/PartnerRegister';
 import { loadpartner } from './featured/partnerActions/partnerActions';
 import Dashboard from './components/dashboard/Dashboard';
 import NotFound from './components/layout/notFound/NotFound';
+import NewProduct from './components/product/NewProduct';
 
 function App() {
 
@@ -39,6 +40,8 @@ function App() {
           <Route exact element={<PartnerLogin />} path='/partner/login' />
           <Route exact element={<PartnerRegister />} path='/partner/signup' />
           <Route exact element={<Dashboard />} path='/dashboard' />
+
+          <Route exact path='/product/new' element={<NewProduct />} />
 
           <Route path='*' element={<NotFound />} />
 

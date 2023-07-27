@@ -34,13 +34,13 @@ const SideBar = () => {
 
   return (
     <Fragment>
-      <Box display={{ base: "none", md: "flex" }}>
+      <Box width="100%" display={{ base: "none", md: "flex" }}>
         <Box
+          width={"100%"}
           hidden={open}
-          width={"230px"}
           padding={"20px"}
           borderRight={"1px"}
-          height={"100vh"}
+          minHeight={"100vh"}
           borderColor={"rgba(0, 0, 0, 0.2)"}
         >
           <Box marginBottom={"40px"} textAlign={"center"}>

@@ -14,6 +14,7 @@ import Profile from "../../images/Profile.png";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
+import { clearErrors } from "../../featured/slices/authSlice";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -23,7 +24,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isAuthenticated, loading, error } = useSelector(
+    (state) => state.auth
+  );
 
   const collectData = (e) => {
     if (e.target.name === "avatar") {
@@ -47,7 +50,12 @@ const Register = () => {
       toast.success("Registered Successfully");
       navigate("/");
     }
-  }, [isAuthenticated, navigate]);
+
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+  }, [isAuthenticated, error, navigate, dispatch]);
 
   const handleRegister = (e) => {
     e.preventDefault();

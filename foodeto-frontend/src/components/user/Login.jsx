@@ -13,13 +13,17 @@ import { login } from "../../featured/actions/userActions";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
+import { clearErrors } from "../../featured/slices/authSlice";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+
+  const { isAuthenticated, loading, error } = useSelector(
+    (state) => state.auth
+  );
 
   const collectData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,8 +39,11 @@ const Login = () => {
       toast.success("Logged in successfully");
       navigate("/");
     }
-    // eslint-disable-next-line
-  }, [isAuthenticated]);
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+  }, [isAuthenticated, error, dispatch, navigate]);
 
   return (
     <Fragment>
