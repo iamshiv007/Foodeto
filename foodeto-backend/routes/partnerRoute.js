@@ -1,11 +1,21 @@
 const express = require('express')
-const { isAuthenticatedPartner } = require('../middleware/auth')
-const { loginPartner, registerPartner, logoutPartner, getPartnerDetails } = require('../controllers/partnerController')
+const { isAuthenticatedPartner, authorizeRoles } = require('../middleware/auth')
+const { loginPartner, registerPartner, logoutPartner, getPartnerDetails, forgotPassword, resetPassword, updatePassword, updateProfile } = require('../controllers/partnerController')
+const { getAllUsers, getSingleUser, updateUserRole, deleteUser } = require('../controllers/userController')
 const router = express.Router()
 
 router.route('/partner/register').post(registerPartner)
 router.route('/partner/login').post(loginPartner)
 router.route('/partner/logout').get(logoutPartner)
 router.route('/partner/me').get(isAuthenticatedPartner, getPartnerDetails)
+router.route('/partner/password/forgot').post(forgotPassword)
+router.route('/partner/password/reset/:token').put(resetPassword)
+router.route('/partner/password/update').put(isAuthenticatedPartner, updatePassword)
+router.route('/partner/me/update').put(isAuthenticatedPartner, updateProfile)
+router.route('/admin/partners').get(isAuthenticatedPartner, authorizeRoles("Admin"), getAllUsers)
+router.route('/admin/partner/:id')
+    .get(isAuthenticatedPartner, authorizeRoles("Admin"), getSingleUser)
+    .put(isAuthenticatedPartner, authorizeRoles("Admin"), updateUserRole)
+    .delete(isAuthenticatedPartner, authorizeRoles("Admin"), deleteUser)
 
 module.exports = router

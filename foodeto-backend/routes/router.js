@@ -16,4 +16,8 @@ router.use('/', product)
 const rating = require("./ratingRoute")
 router.use('/', rating)
 
+// Order
+const order = require('./orderRoute')
+router.use('/', order)
+
 module.exports = router
