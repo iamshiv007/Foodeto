@@ -25,10 +25,6 @@ const userSchema = new mongoose.Schema({
         minLength: [8, 'Password should be greater than 8 characters'],
         select: false
     },
-    ratings: {
-        type: Number,
-        default: 0
-    },
     avatar: [{
         public_id: {
             type: String,

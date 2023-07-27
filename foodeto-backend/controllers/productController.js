@@ -93,7 +93,7 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
     const { id } = req.params
-    
+
     let newProductData = req.body
 
     const product = await Product.findById(id)
@@ -148,5 +148,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
 
     const deletedProduct = await Product.findByIdAndDelete(id)
 
-    res.status(200).json({ success: true, message: "Product Deleted", deletedProduct })
+    const deletedRatings = await Rating.deleteMany({ product: id });
+
+    res.status(200).json({ success: true, message: "Product Deleted", deletedProduct, deletedRatings })
 })

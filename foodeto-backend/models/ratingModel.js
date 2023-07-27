@@ -1,6 +1,6 @@
-const mongoose = reqiure("mongoose")
+const mongoose = require("mongoose")
 
-const ratingSchema = mongoose.schema({
+const ratingSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         required: true,
