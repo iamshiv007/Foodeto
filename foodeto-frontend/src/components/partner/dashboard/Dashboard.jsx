@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import SideBar from "../layout/SideBar";
 import MetaData from "../../layout/metaData/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import Shop from "../../../images/shop.png";
 import Loader from "../../layout/loader/Loader";
 import { getPartnerProducts } from "../../../featured/actions/productActions";
@@ -45,16 +45,18 @@ const Dashboard = () => {
                   width={"150px"}
                   height={"150px"}
                   border={"1px"}
-                  padding={"5px"}
                   overflow={"hidden"}
                 >
-                  <img
+                  <Image
                     src={
                       partner?.shopImage[0]?.url
                         ? partner?.shopImage[0]?.url
                         : Shop
                     }
                     alt="shop"
+                    objectFit={"cover"}
+                    width='100%'
+                    height={'100%'}
                   />
                 </Box>
 

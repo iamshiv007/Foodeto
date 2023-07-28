@@ -10,9 +10,11 @@ import KachoriImage from "../../images/aloo-pyaj-kachori.jpg";
 import BurgerImage from "../../images/Cheese-burger.jpg";
 import CakeImage from "../../images/david-holifield.jpg";
 import PizzaImage from "../../images/italian pizza.jpg";
+import ThaliImage from "../../images/thali-image.jpg";
 import ProductList from "../product/components/ProductList";
 import Footer from "../layout/footer/Footer";
 import { getAllProducts } from "../../featured/actions/productActions";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -60,15 +62,17 @@ const Menu = () => {
       flexDirection={"column"}
     >
       <Box>
-        <Image
-          margin={"auto"}
-          width={"70px"}
-          height={"70px"}
-          objectFit={"cover"}
-          borderRadius={"100%"}
-          src={KachoriImage}
-          alt="kachori"
-        />
+        <NavLink to="/products?category=Kachori">
+          <Image
+            margin={"auto"}
+            width={"70px"}
+            height={"70px"}
+            objectFit={"cover"}
+            borderRadius={"100%"}
+            src={KachoriImage}
+            alt="Kachori"
+          />
+        </NavLink>
       </Box>
       <Text align={"center"} padding={"10px"}>
         Kachori
@@ -81,15 +85,17 @@ const Menu = () => {
       flexDirection={"column"}
     >
       <Box>
-        <Image
-          margin={"auto"}
-          width={"70px"}
-          height={"70px"}
-          objectFit={"cover"}
-          borderRadius={"100%"}
-          src={CakeImage}
-          alt="kachori"
-        />
+        <NavLink to="/products?category=Cake">
+          <Image
+            margin={"auto"}
+            width={"70px"}
+            height={"70px"}
+            objectFit={"cover"}
+            borderRadius={"100%"}
+            src={CakeImage}
+            alt="Cake"
+          />
+        </NavLink>
       </Box>
       <Text align={"center"} padding={"10px"}>
         Cake
@@ -102,15 +108,17 @@ const Menu = () => {
       flexDirection={"column"}
     >
       <Box>
-        <Image
-          margin={"auto"}
-          width={"70px"}
-          height={"70px"}
-          objectFit={"cover"}
-          borderRadius={"100%"}
-          src={BurgerImage}
-          alt="kachori"
-        />
+        <NavLink to="/products?category=Burger">
+          <Image
+            margin={"auto"}
+            width={"70px"}
+            height={"70px"}
+            objectFit={"cover"}
+            borderRadius={"100%"}
+            src={BurgerImage}
+            alt="Burger"
+          />
+        </NavLink>
       </Box>
       <Text align={"center"} padding={"10px"}>
         Burger
@@ -123,18 +131,43 @@ const Menu = () => {
       flexDirection={"column"}
     >
       <Box>
-        <Image
-          margin={"auto"}
-          width={"70px"}
-          height={"70px"}
-          objectFit={"cover"}
-          borderRadius={"100%"}
-          src={PizzaImage}
-          alt="kachori"
-        />
+        <NavLink to="/products?category=Pizza">
+          <Image
+            margin={"auto"}
+            width={"70px"}
+            height={"70px"}
+            objectFit={"cover"}
+            borderRadius={"100%"}
+            src={PizzaImage}
+            alt="Pizza"
+          />
+        </NavLink>
       </Box>
       <Text align={"center"} padding={"10px"}>
         Pizza
+      </Text>
+    </Box>,
+    <Box
+      width={{ base: "140px", md: "200px" }}
+      padding={"20px"}
+      display={"flex"}
+      flexDirection={"column"}
+    >
+      <Box>
+        <NavLink to="/products?category=Thali">
+          <Image
+            margin={"auto"}
+            width={"70px"}
+            height={"70px"}
+            objectFit={"cover"}
+            borderRadius={"100%"}
+            src={ThaliImage}
+            alt="Thali"
+          />
+        </NavLink>
+      </Box>
+      <Text align={"center"} padding={"10px"}>
+        Thali
       </Text>
     </Box>,
     <Box width={{ base: "140px", md: "200px" }}>

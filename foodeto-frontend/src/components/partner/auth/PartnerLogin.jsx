@@ -14,13 +14,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../../layout/metaData/MetaData";
 import { login } from "../../../featured/partnerActions/partnerActions";
 import Logo from "../../../images/Logo.png";
+import { clearErrors } from "../../../featured/partnerSlices/authSlice";
 
 const PartnerLogin = () => {
   const [formData, setFormData] = useState({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isPartner, loading } = useSelector((state) => state.authPartner);
+  const { isPartner, loading, error } = useSelector(
+    (state) => state.authPartner
+  );
 
   const collectData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,6 +33,13 @@ const PartnerLogin = () => {
     e.preventDefault();
     dispatch(login(formData));
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+  }, [error, dispatch]);
 
   useEffect(() => {
     if (isPartner) {

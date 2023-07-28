@@ -143,7 +143,7 @@ const EditProduct = () => {
               <FormControl isRequired>
                 <FormLabel>Product Name</FormLabel>
                 <Input
-                  value={formData.productName}
+                  value={formData.productName || ""}
                   onChange={collectData}
                   type="text"
                   name="productName"
@@ -152,7 +152,7 @@ const EditProduct = () => {
               <FormControl isRequired>
                 <FormLabel>Price (INR)</FormLabel>
                 <Input
-                  value={formData.price}
+                  value={formData.price || ""}
                   onChange={collectData}
                   type="number"
                   name="price"
@@ -161,7 +161,7 @@ const EditProduct = () => {
               <FormControl isRequired>
                 <FormLabel>Unit</FormLabel>
                 <Input
-                  value={formData.unit}
+                  value={formData.unit || 0}
                   onChange={collectData}
                   type="number"
                   name="unit"
@@ -175,7 +175,7 @@ const EditProduct = () => {
                   name="status"
                   defaultValue={"Available"}
                   placeholder="Select Status"
-                  value={formData.status}
+                  value={formData.status || ""}
                 >
                   <option value="Available">Available</option>
                   <option value="Not Available">Not Available</option>
@@ -188,18 +188,19 @@ const EditProduct = () => {
                   name="category"
                   onChange={collectData}
                   placeholder="Select Category"
-                  value={formData.category}
+                  value={formData.category || ""}
                 >
                   <option value="Kachori">Kachori</option>
                   <option value="Pizza">Pizza</option>
                   <option value="Burger">Burger</option>
                   <option value="Cake">Cake</option>
+                  <option value="Thali">Thali</option>
                 </Select>
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Time (Minutes)</FormLabel>
                 <Input
-                  value={formData.time}
+                  value={formData.time || 0}
                   onChange={collectData}
                   type="number"
                   name="time"
@@ -208,7 +209,7 @@ const EditProduct = () => {
               <FormControl isRequired>
                 <FormLabel>discount (%)</FormLabel>
                 <Input
-                  value={formData.discount}
+                  value={formData.discount || 0}
                   onChange={collectData}
                   type="number"
                   name="discount"

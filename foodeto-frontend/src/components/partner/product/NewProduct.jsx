@@ -144,6 +144,7 @@ const NewProduct = () => {
                   <option value="Pizza">Pizza</option>
                   <option value="Burger">Burger</option>
                   <option value="Cake">Cake</option>
+                  <option value="Thali">Thali</option>
                 </Select>
               </FormControl>
               <FormControl isRequired>
@@ -184,6 +185,7 @@ const NewProduct = () => {
                       alt="Product"
                       objectFit={"cover"}
                       height={"100%"}
+                      width="100%"
                     />
                   </Box>
                 </label>
