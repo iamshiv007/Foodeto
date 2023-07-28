@@ -10,8 +10,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
     if (productImage) {
         var myCloud = await cloudinary.v2.uploader.upload(productImage, {
-            folder: "Products",
-            crop: "scale"
+            folder: "Products"
         })
     }
 
@@ -71,7 +70,7 @@ exports.getPartnerProducts = catchAsyncError(async (req, res, next) => {
 
     const totalProducts = await Product.countDocuments({ partner: req.partner.id })
 
-    const products = await Product.find({ partner: req.partner.id })
+    const products = await Product.find({ partner: req.partner.id }).populate('partner')
 
     res.status(200).json({ success: true, totalProducts, products })
 })
@@ -108,14 +107,14 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
     if (req.body.productImage) {
 
-        const imageId = product.productImage.public_id
+        const imageId = product.productImage[0]?.public_id
 
-        await cloudinary.v2.uploader.destroy(imageId)
+        if (imageId) {
+            await cloudinary.v2.uploader.destroy(imageId)
+        }
 
         const myCloud = await cloudinary.v2.uploader.upload(req.body.productImage, {
-            folder: "Products",
-            width: 300,
-            crop: 'scale'
+            folder: "Products"
         })
 
         newProductData.productImage = {

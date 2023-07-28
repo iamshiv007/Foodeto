@@ -1,30 +1,26 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { clear_errors } from "../../../featured/slices/productsSlice";
-import { getAllProducts } from "../../../featured/actions/productActions";
 import ProductCard from "./ProductCard";
 import Loader from "../../layout/loader/Loader";
 
-const ProductList = () => {
+const ProductList = ({ myFunction, link }) => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(myFunction());
 
     if (error) {
       toast.error(error);
       dispatch(clear_errors());
     }
-  }, [dispatch, error]);
+  }, [dispatch, error, myFunction]);
 
   return (
     <>
-      <Text fontSize={"3xl"} fontWeight={"bold"} padding={"10px 20px"}>
-        Products
-      </Text>
       <Box
         display={"grid"}
         gap={4}
@@ -42,10 +38,11 @@ const ProductList = () => {
             <ProductCard
               productId={product._id}
               productName={product.productName}
-              productImage={product.productImage.url}
+              productImage={product.productImage[0]?.url}
               price={product.price}
               time={product.time}
               city={product.partner.city}
+              link={link}
             />
           ))
         )}

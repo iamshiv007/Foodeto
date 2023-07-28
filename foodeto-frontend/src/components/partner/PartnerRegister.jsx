@@ -194,7 +194,7 @@ const PartnerRegister = () => {
             <Text>Already have an acount?</Text>
             <NavLink to="/partner/login">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Log In for Partner
+                Login for Partner
               </Text>
             </NavLink>
           </Box>
@@ -207,7 +207,7 @@ const PartnerRegister = () => {
             <Text>Register as an User?</Text>
             <NavLink to="/signup">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Signup
+                Signup for User
               </Text>
             </NavLink>
           </Box>

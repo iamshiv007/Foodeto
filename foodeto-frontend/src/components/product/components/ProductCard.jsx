@@ -12,6 +12,7 @@ import { IoMdTime } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import StarRatingsComp from "./StarRatings";
+import plate from "../../../images/plate.png";
 
 const ProductCard = ({
   productId,
@@ -20,13 +21,21 @@ const ProductCard = ({
   price,
   time,
   city,
+  link,
 }) => {
   return (
     <Fragment>
       <Card key={productId}>
         <CardBody>
-          <NavLink to={`product/${productId}`}>
-            <Image src={productImage} alt={productName} borderRadius="lg" />
+          <NavLink to={`${link}/${productId}`}>
+            <Image
+              height={"150px"}
+              width={"100%"}
+              objectFit={"cover"}
+              src={productImage || plate}
+              alt={productName}
+              borderRadius="lg"
+            />
           </NavLink>
 
           <Stack mt="6" spacing="3">

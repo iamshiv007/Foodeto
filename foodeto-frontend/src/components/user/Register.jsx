@@ -84,6 +84,7 @@ const Register = () => {
           alignItems="center"
           justifyContent="center"
           templateColumns={{ base: "90%", md: "40%" }}
+          paddingBottom={"10px"}
         >
           <Text
             colorScheme="teal"
@@ -184,7 +185,7 @@ const Register = () => {
             <Text>Register as a Partner</Text>
             <NavLink to="/partner/signup">
               <Text fontSize={"sm"} textColor={"tomato"}>
-                Sign Up
+                Signup as Partner
               </Text>
             </NavLink>
           </Box>

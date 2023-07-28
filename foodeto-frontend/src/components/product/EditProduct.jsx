@@ -13,25 +13,34 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import plate from "../../images/plate.png";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MetaData from "../layout/metaData/MetaData";
 import {
   clear_errors,
-  newProductReset,
+  updateProductReset,
 } from "../../featured/slices/productSlice";
-import { newProduct } from "../../featured/actions/productActions";
+import { clear_errors as productDetailsClearError } from "../../featured/slices/productDetailsSlice";
+import {
+  getProductDetails,
+  updateProduct,
+} from "../../featured/actions/productActions";
 import SideBar from "../partnerLayout/SideBar";
 
-const NewProduct = () => {
-  const [formData, setFormData] = useState({ status: "Available" });
+const EditProduct = () => {
+  const [formData, setFormData] = useState({});
   const [productImage, setProductImage] = useState("");
   const [productImagePreview, setProductImagePreview] = useState(plate);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const { productCreated, error, loading } = useSelector(
+  const { productUpdated, error, loading } = useSelector(
     (state) => state.product
+  );
+
+  const { product, error: productDetailsError } = useSelector(
+    (state) => state.productDetails
   );
 
   const collectData = (e) => {
@@ -52,17 +61,38 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
-    if (productCreated) {
-      toast.success("Product Created");
-      dispatch(newProductReset());
+    if (productUpdated) {
+      toast.success("Product Updated");
+      dispatch(updateProductReset());
       navigate("/dashboard");
     }
 
-    if (error) {
+    if (error || productDetailsError) {
       toast.error(error);
       dispatch(clear_errors());
+      dispatch(productDetailsClearError());
     }
-  }, [productCreated, error, navigate, dispatch]);
+
+    if (
+      ((!product || product === {}) && !productDetailsError) ||
+      product._id !== id
+    ) {
+      dispatch(getProductDetails(id));
+    }
+
+    if (product) {
+      setFormData(product);
+      setProductImagePreview(product.productImage[0]?.url);
+    }
+  }, [
+    productUpdated,
+    error,
+    navigate,
+    dispatch,
+    product,
+    productDetailsError,
+    id,
+  ]);
 
   const handleNewProduct = (e) => {
     e.preventDefault();
@@ -79,7 +109,7 @@ const NewProduct = () => {
     myForm.append("status", status);
     myForm.append("category", category);
     myForm.append("productImage", productImage);
-    dispatch(newProduct(myForm));
+    dispatch(updateProduct(id, myForm));
   };
   return (
     <Fragment>
@@ -105,19 +135,34 @@ const NewProduct = () => {
                 color="tomato"
                 fontSize="2xl"
               >
-                Create A Product
+                Edit Product
               </Text>
               <FormControl isRequired>
                 <FormLabel>Product Name</FormLabel>
-                <Input onChange={collectData} type="text" name="productName" />
+                <Input
+                  value={formData.productName}
+                  onChange={collectData}
+                  type="text"
+                  name="productName"
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Price (INR)</FormLabel>
-                <Input onChange={collectData} type="number" name="price" />
+                <Input
+                  value={formData.price}
+                  onChange={collectData}
+                  type="number"
+                  name="price"
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Unit</FormLabel>
-                <Input onChange={collectData} type="number" name="unit" />
+                <Input
+                  value={formData.unit}
+                  onChange={collectData}
+                  type="number"
+                  name="unit"
+                />
               </FormControl>
 
               <FormControl isRequired>
@@ -127,6 +172,7 @@ const NewProduct = () => {
                   name="status"
                   defaultValue={"Available"}
                   placeholder="Select Status"
+                  value={formData.status}
                 >
                   <option value="Available">Available</option>
                   <option value="Not Available">Not Available</option>
@@ -139,6 +185,7 @@ const NewProduct = () => {
                   name="category"
                   onChange={collectData}
                   placeholder="Select Category"
+                  value={formData.category}
                 >
                   <option value="Kachori">Kachori</option>
                   <option value="Pizza">Pizza</option>
@@ -148,11 +195,21 @@ const NewProduct = () => {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Time (Minutes)</FormLabel>
-                <Input onChange={collectData} type="number" name="time" />
+                <Input
+                  value={formData.time}
+                  onChange={collectData}
+                  type="number"
+                  name="time"
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>discount (%)</FormLabel>
-                <Input onChange={collectData} type="number" name="discount" />
+                <Input
+                  value={formData.discount}
+                  onChange={collectData}
+                  type="number"
+                  name="discount"
+                />
               </FormControl>
               <FormControl
                 display={"flex"}
@@ -183,7 +240,8 @@ const NewProduct = () => {
                       src={productImagePreview}
                       alt="Product"
                       objectFit={"cover"}
-                      height={"100%"}
+                      width="100%"
+                      height="100%"
                     />
                   </Box>
                 </label>
@@ -196,7 +254,7 @@ const NewProduct = () => {
                 loadingText="Processing"
                 colorScheme="teal"
               >
-                Create
+                Update
               </Button>
             </Grid>
           </form>
@@ -206,4 +264,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default EditProduct;

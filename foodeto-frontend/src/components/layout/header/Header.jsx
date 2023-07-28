@@ -214,6 +214,20 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
                   <AiTwotoneHome /> Home
                 </Box>
               </NavLink>
+              <NavLink to="/products">
+                <Box
+                  _hover={{
+                    transform: "scale(1.1)",
+                    transition: "all 0.1s",
+                  }}
+                  padding={"4px 10px"}
+                  display={"flex"}
+                  gap={2}
+                  alignItems={"center"}
+                >
+                  <PiBowlFoodFill /> products
+                </Box>
+              </NavLink>
               <NavLink to="/">
                 <Box
                   _hover={{

@@ -76,7 +76,7 @@ const SideBar = () => {
               </Box>
             </NavLink>
 
-            <NavLink to="/products">
+            <NavLink to="/partner/products">
               <Box
                 _hover={{
                   transform: "scale(1.1)",
@@ -87,7 +87,7 @@ const SideBar = () => {
                 gap={2}
                 alignItems={"center"}
               >
-                Products
+                My Products
               </Box>
             </NavLink>
 
@@ -243,7 +243,7 @@ const MobileSideBar = ({ isOpen, onOpen, onClose, logoutHandler }) => {
                   </Box>
                 </NavLink>
 
-                <NavLink to="/products">
+                <NavLink to="/partner/products">
                   <Box
                     _hover={{
                       transform: "scale(1.1)",
@@ -254,7 +254,7 @@ const MobileSideBar = ({ isOpen, onOpen, onClose, logoutHandler }) => {
                     gap={2}
                     alignItems={"center"}
                   >
-                    Products
+                    My Products
                   </Box>
                 </NavLink>
 

@@ -12,7 +12,7 @@ const productDetailsSlice = createSlice({
     productDetailsSuccess: (state, action) => ({
       ...state,
       loading: false,
-      product: action.payload.product,
+      product: action.payload.productDetails,
     }),
     productDetailsFailed: (state, action) => ({
       ...state,

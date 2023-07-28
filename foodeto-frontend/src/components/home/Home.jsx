@@ -12,6 +12,7 @@ import CakeImage from "../../images/david-holifield.jpg";
 import PizzaImage from "../../images/italian pizza.jpg";
 import ProductList from "../product/components/ProductList";
 import Footer from "../layout/footer/Footer";
+import { getAllProducts } from "../../featured/actions/productActions";
 
 const Home = () => {
   return (
@@ -40,7 +41,10 @@ const Home = () => {
       <MobileHome />
       <Menu />
 
-      <ProductList />
+      <Text fontSize={"3xl"} fontWeight={"bold"} padding={"10px 20px"}>
+        Products
+      </Text>
+      <ProductList link={"/product"} myFunction={getAllProducts} />
 
       <Footer />
     </Fragment>
