@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../featured/partnerActions/partnerActions";
+import { logout } from "../../../featured/partnerActions/partnerActions";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FiMenu } from "react-icons/fi";

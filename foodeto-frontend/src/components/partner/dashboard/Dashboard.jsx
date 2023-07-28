@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from "react";
-import SideBar from "../partnerLayout/SideBar";
-import MetaData from "../layout/metaData/MetaData";
+import SideBar from "../layout/SideBar";
+import MetaData from "../../layout/metaData/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Text } from "@chakra-ui/react";
-import Shop from "../../images/shop.png";
-import Loader from "../layout/loader/Loader";
-import { getPartnerProducts } from "../../featured/actions/productActions";
+import Shop from "../../../images/shop.png";
+import Loader from "../../layout/loader/Loader";
+import { getPartnerProducts } from "../../../featured/actions/productActions";
 
 const Dashboard = () => {
   const { partner, loading } = useSelector((state) => state.authPartner);

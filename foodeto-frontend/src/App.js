@@ -1,22 +1,22 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
-import Login from './components/user/Login';
-import Register from './components/user/Register';
+import Login from './components/user/auth/Login';
+import Register from './components/user/auth/Register';
 import Home from './components/home/Home';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './featured/actions/userActions';
 import { useEffect } from 'react';
-import Profile from './components/user/Profile';
-import PartnerLogin from './components/partner/PartnerLogin';
-import PartnerRegister from './components/partner/PartnerRegister';
+import Profile from './components/user/profile/Profile';
+import PartnerLogin from './components/partner/auth/PartnerLogin';
+import PartnerRegister from './components/partner/auth/PartnerRegister';
 import { loadpartner } from './featured/partnerActions/partnerActions';
-import Dashboard from './components/dashboard/Dashboard';
 import NotFound from './components/layout/notFound/NotFound';
-import NewProduct from './components/product/NewProduct';
+import NewProduct from './components/partner/product/NewProduct';
 import Products from './components/product/Products';
-import PartnerProducts from './components/partner/PartnerProducts';
-import EditProduct from './components/product/EditProduct';
+import PartnerProducts from './components/partner/product/PartnerProducts';
+import EditProduct from './components/partner/product/EditProduct';
+import Dashboard from './components/partner/dashboard/Dashboard';
 
 function App() {
 

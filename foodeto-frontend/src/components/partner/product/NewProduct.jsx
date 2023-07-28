@@ -11,16 +11,16 @@ import {
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import plate from "../../images/plate.png";
+import plate from "../../../images/plate.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import MetaData from "../layout/metaData/MetaData";
+import MetaData from "../../layout/metaData/MetaData";
 import {
   clear_errors,
   newProductReset,
-} from "../../featured/slices/productSlice";
-import { newProduct } from "../../featured/actions/productActions";
-import SideBar from "../partnerLayout/SideBar";
+} from "../../../featured/slices/productSlice";
+import { newProduct } from "../../../featured/actions/productActions";
+import SideBar from "../layout/SideBar";
 
 const NewProduct = () => {
   const [formData, setFormData] = useState({ status: "Available" });

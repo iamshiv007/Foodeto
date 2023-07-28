@@ -1,8 +1,8 @@
 import React from "react";
-import ProductList from "../product/components/ProductList";
-import { getPartnerProducts } from "../../featured/actions/productActions";
+import ProductList from "../../product/components/ProductList";
+import { getPartnerProducts } from "../../../featured/actions/productActions";
 import { Box, Text } from "@chakra-ui/react";
-import SideBar from "../partnerLayout/SideBar";
+import SideBar from "../layout/SideBar";
 
 const PartnerProducts = () => {
   return (

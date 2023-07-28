@@ -11,20 +11,20 @@ import {
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import plate from "../../images/plate.png";
+import plate from "../../../images/plate.png";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import MetaData from "../layout/metaData/MetaData";
+import MetaData from "../../layout/metaData/MetaData";
 import {
   clear_errors,
   updateProductReset,
-} from "../../featured/slices/productSlice";
-import { clear_errors as productDetailsClearError } from "../../featured/slices/productDetailsSlice";
+} from "../../../featured/slices/productSlice";
+import { clear_errors as productDetailsClearError } from "../../../featured/slices/productDetailsSlice";
 import {
   getProductDetails,
   updateProduct,
-} from "../../featured/actions/productActions";
-import SideBar from "../partnerLayout/SideBar";
+} from "../../../featured/actions/productActions";
+import SideBar from "../layout/SideBar";
 
 const EditProduct = () => {
   const [formData, setFormData] = useState({});
@@ -101,6 +101,7 @@ const EditProduct = () => {
       formData;
 
     const myForm = new FormData();
+
     myForm.append("productName", productName);
     myForm.append("price", price);
     myForm.append("unit", unit);
@@ -108,7 +109,9 @@ const EditProduct = () => {
     myForm.append("discount", discount);
     myForm.append("status", status);
     myForm.append("category", category);
-    myForm.append("productImage", productImage);
+    if (productImage !== "") {
+      myForm.append("productImage", productImage);
+    }
     dispatch(updateProduct(id, myForm));
   };
   return (

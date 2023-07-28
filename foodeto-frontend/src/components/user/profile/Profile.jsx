@@ -1,9 +1,9 @@
 import { Box, Button, Grid, Image, Text } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
-import ProfileImage from "../../images/Profile.png";
-import MetaData from "../layout/metaData/MetaData";
-import Header from "../layout/header/Header";
+import ProfileImage from "../../../images/Profile.png";
+import MetaData from "../../layout/metaData/MetaData";
+import Header from "../../layout/header/Header";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);

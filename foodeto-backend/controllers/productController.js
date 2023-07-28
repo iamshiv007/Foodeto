@@ -92,7 +92,7 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
     const { id } = req.params
 
-    let newProductData = req.body
+    let {newProductData} = req.body
 
     const product = await Product.findById(id)
 
