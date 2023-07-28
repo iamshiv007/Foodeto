@@ -11,6 +11,7 @@ import BurgerImage from "../../images/Cheese-burger.jpg";
 import CakeImage from "../../images/david-holifield.jpg";
 import PizzaImage from "../../images/italian pizza.jpg";
 import ProductList from "../product/components/ProductList";
+import Footer from "../layout/footer/Footer";
 
 const Home = () => {
   return (
@@ -40,6 +41,8 @@ const Home = () => {
       <Menu />
 
       <ProductList />
+
+      <Footer />
     </Fragment>
   );
 };

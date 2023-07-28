@@ -10,8 +10,8 @@ import {
 import React, { Fragment } from "react";
 import { IoMdTime } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
-import StarRatings from "./StarRatings";
 import { NavLink } from "react-router-dom";
+import StarRatingsComp from "./StarRatings";
 
 const ProductCard = ({
   productId,
@@ -54,7 +54,7 @@ const ProductCard = ({
             paddingY={"8px"}
             justifyContent={"space-between"}
           >
-            <StarRatings productId={productId} />
+            <StarRatingsComp productId={productId} />
 
             <Text
               display={"flex"}
