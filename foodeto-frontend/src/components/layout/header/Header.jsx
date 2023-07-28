@@ -18,6 +18,7 @@ import { logout } from "../../../featured/actions/userActions";
 import { toast } from "react-toastify";
 import { FiMenu, FiLogOut, FiLogIn } from "react-icons/fi";
 import { AiTwotoneHome } from "react-icons/ai";
+import { PiBowlFoodFill } from "react-icons/pi";
 
 const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -38,7 +39,9 @@ const Header = () => {
         display={{ base: "none", md: "flex" }}
         justifyContent={"space-between"}
         padding={"10px 30px"}
-        background={"rgba(0, 0, 0, 0.4)"}
+        background={"rgba(135, 218, 237)"}
+        position={"sticky"}
+        top={"0"}
       >
         <Box>
           <NavLink to="/">
@@ -54,9 +57,23 @@ const Header = () => {
         </Box>
 
         <Box gap={3} display={"flex"}>
+          <NavLink to="/products">
+            <Box
+              _hover={{ background: "tomato;" }}
+              borderRadius={"10px"}
+              padding={"4px 10px"}
+              display={"flex"}
+              gap={2}
+              alignItems={"center"}
+              color={"white"}
+            >
+              <PiBowlFoodFill /> products
+            </Box>
+          </NavLink>
+
           <NavLink to="/">
             <Box
-              _hover={{ background: "#2e2e2e;" }}
+              _hover={{ background: "tomato;" }}
               borderRadius={"10px"}
               padding={"4px 10px"}
               display={"flex"}
@@ -71,7 +88,7 @@ const Header = () => {
           {isAuthenticated && (
             <NavLink to="/profile">
               <Box
-                _hover={{ background: "#2e2e2e;" }}
+                _hover={{ background: "tomato;" }}
                 borderRadius={"10px"}
                 padding={"4px 10px"}
                 display={"flex"}
@@ -86,7 +103,7 @@ const Header = () => {
 
           {isAuthenticated ? (
             <Box
-              _hover={{ background: "#2e2e2ez" }}
+              _hover={{ background: "tomato" }}
               borderRadius={"10px"}
               padding={"4px 10px"}
               display={"flex"}
@@ -101,7 +118,7 @@ const Header = () => {
           ) : (
             <NavLink to="/login">
               <Box
-                _hover={{ background: "#2e2e2e;" }}
+                _hover={{ background: "tomato;" }}
                 borderRadius={"10px"}
                 padding={"4px 10px"}
                 display={"flex"}
@@ -134,7 +151,11 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
 
   return (
     <>
-      <Box padding={"20px"} display={"flex"} justifyContent={"flex-end"}>
+      <Box
+        padding={"20px"}
+        display={{ base: "flex", md: "none" }}
+        justifyContent={"flex-end"}
+      >
         <IconButton
           display={{ base: "flex", md: "none" }}
           ref={btnRef}

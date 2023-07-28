@@ -10,6 +10,7 @@ import KachoriImage from "../../images/aloo-pyaj-kachori.jpg";
 import BurgerImage from "../../images/Cheese-burger.jpg";
 import CakeImage from "../../images/david-holifield.jpg";
 import PizzaImage from "../../images/italian pizza.jpg";
+import ProductList from "../product/components/ProductList";
 
 const Home = () => {
   return (
@@ -37,6 +38,8 @@ const Home = () => {
       </Box>
       <MobileHome />
       <Menu />
+
+      <ProductList />
     </Fragment>
   );
 };

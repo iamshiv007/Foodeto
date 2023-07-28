@@ -11,12 +11,11 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     if (productImage) {
         var myCloud = await cloudinary.v2.uploader.upload(productImage, {
             folder: "Products",
-            width: 300,
             crop: "scale"
         })
     }
 
-    const product = await Product.create(req.body.shopImage ? {
+    const product = await Product.create(productImage ? {
         partner: req.partner._id,
         ...rest,
         productImage: [{
@@ -49,7 +48,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
         ],
     } : category ? { category: category } : {})
         .skip(skip)
-        .limit(productsPerPage);
+        .limit(productsPerPage).populate('partner')
 
     const totalResults = await Product.countDocuments(query ? {
         $or: [

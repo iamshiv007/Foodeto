@@ -10,7 +10,7 @@ export const getAllProducts = (query, page, category) => async (dispatch) => {
     dispatch(allProductsRequest())
     try {
 
-        let link = `${port}/api/products?query=${query}&page=${page}&category=${category}`
+        let link = `${port}/api/products?query=${query || ""}&page=${page || ""}&category=${category || ""}`
 
         // Make API request for load user
         const { data } = await axios.get(link)
