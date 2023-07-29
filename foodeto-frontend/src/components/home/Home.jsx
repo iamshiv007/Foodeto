@@ -4,7 +4,6 @@ import MetaData from "../layout/metaData/MetaData";
 import Header from "../layout/header/Header";
 import home from "../../foodeto images/cakes/swapnil-dwivedi-Nl8Oa6ZuNcA-unsplash.jpg";
 import Footer from "../layout/footer/Footer";
-import Cities from "../product/child/Cities";
 import MobileHome from "./child/MobileHome";
 
 const Home = () => {
@@ -19,9 +18,7 @@ const Home = () => {
           height={"100vh"}
         >
           <Header />
-          <Box marginTop={"150px"}>
-            <Cities />
-          </Box>
+          <Box marginTop={"150px"}>{/* <Cities /> */}</Box>
         </Box>
       </Box>
       <MobileHome />

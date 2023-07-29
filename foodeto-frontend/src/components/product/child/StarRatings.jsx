@@ -7,6 +7,7 @@ const StarRatingsComp = ({ productId }) => {
   return (
     <Fragment>
       <Box display={"flex"} alignItems={"end"} gap={3}>
+        <Text fontSize={"sm"}>3.5</Text>
         <StarRatings
           rating={3.5}
           starRatedColor="#FFD700"

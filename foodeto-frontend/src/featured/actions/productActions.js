@@ -6,11 +6,11 @@ import { deleteProductFailed, deleteProductRequest, deleteProductSuccess, update
 const port = process.env.REACT_APP_BACKEND_URL
 
 // 1. Get All Products
-export const getAllProducts = (query, page, category) => async (dispatch) => {
+export const getAllProducts = (query, page, category, address) => async (dispatch) => {
     dispatch(allProductsRequest())
     try {
 
-        let link = `${port}/api/products?query=${query || ""}&page=${page || ""}&category=${category || ""}`
+        let link = `${port}/api/products?query=${query || ""}&page=${page || ""}&category=${category || ""}&address=${address || ""}`
 
         // Make API request for load user
         const { data } = await axios.get(link)
@@ -81,12 +81,12 @@ export const deleteProduct = (id) => async (dispatch) => {
 }
 
 // 6. Get Partner Products
-export const getPartnerProducts = () => async (dispatch) => {
+export const getPartnerProducts = (id) => async (dispatch) => {
     dispatch(partnerProductsRequest())
 
     try {
 
-        const { data } = await axios.get(`${port}/api/partner/products`)
+        const { data } = await axios.get(`${port}/api/partner/products/${id}`)
 
         dispatch(partnerProductsSuccess(data))
 

@@ -17,6 +17,7 @@ import PartnerProducts from './components/partner/product/PartnerProducts';
 import EditProduct from './components/partner/product/EditProduct';
 import Dashboard from './components/partner/dashboard/Dashboard';
 import CategoryProducts from './components/product/CategoryProducts';
+import SelectProduct from './components/product/SelectProduct';
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
           <Route exact path='/partner/products' element={<PartnerProducts />} />
 
           <Route exact path='/partner/product/update/:id' element={<EditProduct />} />
-          {/* <Route exact path='/products' element={<EditProduct />} /> */}
+          <Route exact path='/product/:id' element={<SelectProduct />} />
 
           <Route path='*' element={<NotFound />} />
 

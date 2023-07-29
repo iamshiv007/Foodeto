@@ -7,6 +7,7 @@ import { getAllProducts } from "../../featured/actions/productActions";
 import FoodMenu from "./child/FoodMenu";
 
 const CategoryProducts = () => {
+  // const [myAddress, setMyAddress] = useState("");
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
@@ -14,19 +15,22 @@ const CategoryProducts = () => {
   return (
     <Fragment>
       <Header />
-      <FoodMenu />
-      <Text
-        fontSize={{ base: "xl", md: "3xl" }}
-        fontWeight={"bold"}
-        padding={"10px 20px"}
-      >
-        Products - {category}
-      </Text>
-      <ProductList
-        link={"/product"}
-        myFunction={getAllProducts}
-        category={category}
-      />
+      <>
+        <FoodMenu />
+        <Text
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontWeight={"bold"}
+          padding={"10px 20px"}
+        >
+          Products - {category}
+        </Text>
+        <ProductList
+          link={"/product"}
+          myFunction={getAllProducts}
+          category={category}
+          // address={myAddress}
+        />
+      </>
     </Fragment>
   );
 };

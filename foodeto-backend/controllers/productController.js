@@ -33,34 +33,35 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 // 2. Get All products
 
 exports.getAllProducts = catchAsyncError(async (req, res, next) => {
-    let { query, page, category } = req.query;
+    let { query, page, category, address } = req.query;
     const productsPerPage = 8;
     page = parseInt(page) || 1
     const skip = (page - 1) * productsPerPage
 
-    const products = await Product.find(query ? {
-        $or: [
+    let queryObj = {};
+    if (query) {
+        queryObj.$or = [
             { productName: { $regex: query, $options: 'i' } },
-            category ? { category: category } : {
-                category: { $regex: query, $options: 'i' }
-            }
-        ],
-    } : category ? { category: category } : {})
-        .skip(skip)
-        .limit(productsPerPage).populate('partner')
+            { category: { $regex: query, $options: 'i' } }
+        ];
+    }
+    if (category) {
+        queryObj.category = category;
+    }
 
-    const totalResults = await Product.countDocuments(query ? {
-        $or: [
-            { productName: { $regex: query, $options: 'i' } },
-            { category: { $regex: query, $options: 'i' } },
-        ],
-    } : {})
+    const products = await Product.find(queryObj)
+        .skip(skip)
+        .limit(productsPerPage)
+        .populate('partner');
+
+
+    const totalResults = await Product.countDocuments(queryObj)
 
     if (products.length === 0) {
         return res.status(200).json({ success: true, message: "Product Not Found" })
     }
 
-    res.status(200).json({ totalResults, searchResults: products.length, success: true, products })
+    res.status(200).json({ totalResults, pageResult: products.length, success: true, products: products })
 
 })
 
@@ -68,9 +69,9 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 
 exports.getPartnerProducts = catchAsyncError(async (req, res, next) => {
 
-    const totalProducts = await Product.countDocuments({ partner: req.partner.id })
+    const totalProducts = await Product.countDocuments({ partner: req.params.id })
 
-    const products = await Product.find({ partner: req.partner.id }).populate('partner')
+    const products = await Product.find({ partner: req.params.id }).populate('partner')
 
     res.status(200).json({ success: true, totalProducts, products })
 })

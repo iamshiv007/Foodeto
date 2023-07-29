@@ -8,18 +8,18 @@ import Loader from "../../layout/loader/Loader";
 import { BiError } from "react-icons/bi";
 import Footer from "../../layout/footer/Footer";
 
-const ProductList = ({ myFunction, link, category }) => {
+const ProductList = ({ myFunction, link, category, address }) => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(myFunction("", "", category === "All" ? "" : category));
+    dispatch(myFunction("", "", category === "All" ? "" : category, address));
 
     if (error) {
       toast.error(error);
       dispatch(clear_errors());
     }
-  }, [dispatch, error, myFunction, category]);
+  }, [dispatch, error, myFunction, category, address]);
 
   return (
     <>

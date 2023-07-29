@@ -58,7 +58,7 @@ const FoodMenu = () => {
         <Text
           padding={"10px 20px"}
           fontWeight={"bold"}
-          fontSize={{ base: "xl", md: "3xl" }}
+          fontSize={{ base: "2xl", md: "3xl" }}
         >
           Menu
         </Text>

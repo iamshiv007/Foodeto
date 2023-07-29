@@ -152,7 +152,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
 
   return (
     <>
-      <Box padding={"20px"} display={"flex"} justifyContent={"flex-end"}>
+      <Box display={"flex"} justifyContent={"flex-end"}>
         <IconButton
           display={{ base: "flex", md: "none" }}
           ref={btnRef}
@@ -214,7 +214,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
                   <AiTwotoneHome /> Home
                 </Box>
               </NavLink>
-              <NavLink to="/products?caregory=All">
+              <NavLink to="/products?category=All">
                 <Box
                   _hover={{
                     transform: "scale(1.1)",
