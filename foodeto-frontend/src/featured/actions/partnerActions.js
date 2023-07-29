@@ -1,5 +1,5 @@
 import axios from "axios"
-import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, signupFailed, signupSuccess, loadPartnerFailed, loadPartnerRequest, signupRequest, loadPartnerSuccess } from "../partnerSlices/authSlice";
+import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, signupFailed, signupSuccess, loadPartnerFailed, loadPartnerRequest, signupRequest, loadPartnerSuccess } from "../slices/authPartnerSlice";
 
 const port = process.env.REACT_APP_BACKEND_URL
 

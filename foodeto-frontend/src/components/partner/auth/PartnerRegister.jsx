@@ -13,7 +13,7 @@ import Shop from "../../../images/shop.png";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../../layout/metaData/MetaData";
-import { register } from "../../../featured/partnerActions/partnerActions";
+import { register } from "../../../featured/actions/partnerActions";
 import Logo from "../../../images/Logo.png";
 
 const PartnerRegister = () => {

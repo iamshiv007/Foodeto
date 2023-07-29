@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import Profile from './components/user/profile/Profile';
 import PartnerLogin from './components/partner/auth/PartnerLogin';
 import PartnerRegister from './components/partner/auth/PartnerRegister';
-import { loadpartner } from './featured/partnerActions/partnerActions';
+import { loadpartner } from './featured/actions/partnerActions';
 import NotFound from './components/layout/notFound/NotFound';
 import NewProduct from './components/partner/product/NewProduct';
 import PartnerProducts from './components/partner/product/PartnerProducts';

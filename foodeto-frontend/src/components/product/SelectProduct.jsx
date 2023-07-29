@@ -25,7 +25,7 @@ const SelectProduct = () => {
     if (product && product !== {} && product._id === id) {
       dispatch(getPartnerProducts(product.partner._id));
     }
-  }, [product, dispatch]);
+  }, [product, dispatch, id]);
 
   return (
     <>

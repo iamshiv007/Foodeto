@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../../layout/metaData/MetaData";
-import { login } from "../../../featured/partnerActions/partnerActions";
+import { login } from "../../../featured/actions/partnerActions";
 import Logo from "../../../images/Logo.png";
-import { clearErrors } from "../../../featured/partnerSlices/authSlice";
+import { clearErrors } from "../../../featured/slices/authPartnerSlice";
 
 const PartnerLogin = () => {
   const [formData, setFormData] = useState({});
