@@ -1,5 +1,5 @@
 import React from "react";
-import ProductList from "../../product/components/ProductList";
+import ProductList from "../../product/child/ProductList";
 import { getPartnerProducts } from "../../../featured/actions/productActions";
 import { Box, Text } from "@chakra-ui/react";
 import SideBar from "../layout/SideBar";
