@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Header from "../layout/header/Header";
 import { Text } from "@chakra-ui/react";
-import ProductList from "./components/ProductList";
+import ProductList from "./child/ProductList";
 import { useLocation } from "react-router-dom";
 import { getAllProducts } from "../../featured/actions/productActions";
 import FoodMenu from "./child/FoodMenu";
