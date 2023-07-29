@@ -6,6 +6,7 @@ import { clear_errors } from "../../../featured/slices/productsSlice";
 import ProductCard from "./ProductCard";
 import Loader from "../../layout/loader/Loader";
 import { BiError } from "react-icons/bi";
+import Footer from "../../layout/footer/Footer";
 
 const ProductList = ({ myFunction, link, category }) => {
   const dispatch = useDispatch();
@@ -25,29 +26,32 @@ const ProductList = ({ myFunction, link, category }) => {
       {loading ? (
         <Loader height="30vh" />
       ) : products ? (
-        <Box
-          display={"grid"}
-          gap={4}
-          gridTemplateColumns={{
-            base: "1fr",
-            sm: "1fr 1fr",
-            md: "1fr 1fr 1fr 1fr",
-          }}
-          padding={"20px"}
-        >
-          {products?.map((product) => (
-            <ProductCard
-              key={product._id}
-              productId={product._id}
-              productName={product.productName}
-              productImage={product.productImage[0]?.url}
-              price={product.price}
-              time={product.time}
-              city={product.partner.city}
-              link={link}
-            />
-          ))}
-        </Box>
+        <>
+          <Box
+            display={"grid"}
+            gap={4}
+            gridTemplateColumns={{
+              base: "1fr",
+              sm: "1fr 1fr",
+              md: "1fr 1fr 1fr 1fr",
+            }}
+            padding={"20px"}
+          >
+            {products?.map((product) => (
+              <ProductCard
+                key={product._id}
+                productId={product._id}
+                productName={product.productName}
+                productImage={product.productImage[0]?.url}
+                price={product.price}
+                time={product.time}
+                city={product.partner.city}
+                link={link}
+              />
+            ))}
+          </Box>
+          <Footer />
+        </>
       ) : (
         <Box
           height={"30vh"}

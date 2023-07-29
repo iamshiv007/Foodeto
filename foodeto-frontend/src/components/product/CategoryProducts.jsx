@@ -5,7 +5,6 @@ import ProductList from "./child/ProductList";
 import { useLocation } from "react-router-dom";
 import { getAllProducts } from "../../featured/actions/productActions";
 import FoodMenu from "./child/FoodMenu";
-import Footer from "../layout/footer/Footer";
 
 const CategoryProducts = () => {
   const location = useLocation();
@@ -16,7 +15,11 @@ const CategoryProducts = () => {
     <Fragment>
       <Header />
       <FoodMenu />
-      <Text fontSize={"3xl"} fontWeight={"bold"} padding={"10px 20px"}>
+      <Text
+        fontSize={{ base: "xl", md: "3xl" }}
+        fontWeight={"bold"}
+        padding={"10px 20px"}
+      >
         Products - {category}
       </Text>
       <ProductList
@@ -24,8 +27,6 @@ const CategoryProducts = () => {
         myFunction={getAllProducts}
         category={category}
       />
-
-      <Footer />
     </Fragment>
   );
 };

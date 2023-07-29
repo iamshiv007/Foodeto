@@ -42,6 +42,7 @@ const Header = () => {
         background={"rgba(135, 218, 237)"}
         position={"sticky"}
         top={"0"}
+        zIndex={10}
       >
         <Box>
           <NavLink to="/">
@@ -57,7 +58,7 @@ const Header = () => {
         </Box>
 
         <Box gap={3} display={"flex"}>
-          <NavLink to="/products">
+          <NavLink to="/products?category=All">
             <Box
               _hover={{ background: "tomato;" }}
               borderRadius={"10px"}
@@ -151,12 +152,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
 
   return (
     <>
-      <Box
-        padding={"20px"}
-        display={{ base: "flex", md: "none" }}
-        justifyContent={"flex-end"}
-        zIndex={1000}
-      >
+      <Box padding={"20px"} display={"flex"} justifyContent={"flex-end"}>
         <IconButton
           display={{ base: "flex", md: "none" }}
           ref={btnRef}
@@ -166,6 +162,9 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
           aria-label="Call Sage"
           fontSize="20px"
           icon={<FiMenu />}
+          position={"fixed"}
+          right={"15px"}
+          top="15px"
         />
       </Box>
       <Drawer
@@ -215,7 +214,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
                   <AiTwotoneHome /> Home
                 </Box>
               </NavLink>
-              <NavLink to="/products">
+              <NavLink to="/products?caregory=All">
                 <Box
                   _hover={{
                     transform: "scale(1.1)",

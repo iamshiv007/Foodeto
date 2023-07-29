@@ -7,7 +7,8 @@ const Cities = () => {
       <Select
         background={"white"}
         margin={"auto"}
-        width={"400px"}
+        width={{base:"90%",
+         md:"400px"}}
         placeholder="Select Your City"
       >
         <option value="Jaipur">Jaipur</option>

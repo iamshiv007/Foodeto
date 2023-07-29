@@ -6,11 +6,12 @@ import BurgerImage from "../../../images/Cheese-burger.jpg";
 import CakeImage from "../../../images/david-holifield.jpg";
 import PizzaImage from "../../../images/italian pizza.jpg";
 import ThaliImage from "../../../images/thali-image.jpg";
+import Logo from "../../../images/Logo.png";
 import { NavLink } from "react-router-dom";
 import { Box, Image, Text } from "@chakra-ui/react";
 
 const menuData = [
-  { name: "All", img: KachoriImage },
+  { name: "All", img: Logo },
   { name: "Kachori", img: KachoriImage },
   { name: "Cake", img: CakeImage },
   { name: "Burger", img: BurgerImage },
@@ -55,17 +56,15 @@ const FoodMenu = () => {
     <>
       <Box marginBottom={"30px"} width={"100%"}>
         <Text
-          marginTop={"20px"}
           padding={"10px 20px"}
           fontWeight={"bold"}
-          fontSize={"3xl"}
+          fontSize={{ base: "xl", md: "3xl" }}
         >
           Menu
         </Text>
 
         <Box>
           <AliceCarousel
-            zIndex={-2}
             mouseTracking
             items={FoodMenu}
             slideBy="page"
