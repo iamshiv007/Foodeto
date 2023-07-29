@@ -4,6 +4,8 @@ import { Text } from "@chakra-ui/react";
 import ProductList from "./components/ProductList";
 import { useLocation } from "react-router-dom";
 import { getAllProducts } from "../../featured/actions/productActions";
+import FoodMenu from "./child/FoodMenu";
+import Footer from "../layout/footer/Footer";
 
 const CategoryProducts = () => {
   const location = useLocation();
@@ -13,6 +15,7 @@ const CategoryProducts = () => {
   return (
     <Fragment>
       <Header />
+      <FoodMenu />
       <Text fontSize={"3xl"} fontWeight={"bold"} padding={"10px 20px"}>
         Products - {category}
       </Text>
@@ -21,6 +24,8 @@ const CategoryProducts = () => {
         myFunction={getAllProducts}
         category={category}
       />
+
+      <Footer />
     </Fragment>
   );
 };

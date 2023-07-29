@@ -155,6 +155,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
         padding={"20px"}
         display={{ base: "flex", md: "none" }}
         justifyContent={"flex-end"}
+        zIndex={1000}
       >
         <IconButton
           display={{ base: "flex", md: "none" }}

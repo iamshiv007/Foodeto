@@ -12,7 +12,7 @@ const ProductList = ({ myFunction, link, category }) => {
   const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(myFunction("", "", category));
+    dispatch(myFunction("", "", category === "All" ? "" : category));
 
     if (error) {
       toast.error(error);
@@ -23,7 +23,7 @@ const ProductList = ({ myFunction, link, category }) => {
   return (
     <>
       {loading ? (
-        <Loader height="20vh" />
+        <Loader height="30vh" />
       ) : products ? (
         <Box
           display={"grid"}
@@ -50,7 +50,7 @@ const ProductList = ({ myFunction, link, category }) => {
         </Box>
       ) : (
         <Box
-          height={"20vh"}
+          height={"30vh"}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
