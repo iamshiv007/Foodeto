@@ -29,7 +29,7 @@ const SelectProductCard = ({ product }) => {
             <Heading size="md" display={"flex"} gap={3} alignItems={"center"}>
               {product?.productName}{" "}
               <Text fontSize={"xs"} color={"green"}>
-                {product.discount} % discount
+                {product?.discount} % discount
               </Text>{" "}
             </Heading>
 

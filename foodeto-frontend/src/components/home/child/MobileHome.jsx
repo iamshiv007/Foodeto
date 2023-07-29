@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import Header from "../../layout/header/Header";
 import Cake2 from "../../../foodeto images/cakes/kaouther-djouada-hcEDfkiVmMI-unsplash.jpg";
-import Cities from "../../product/child/Cities";
+// import Cities from "../../product/child/Cities";
 
 const MobileHome = () => {
   return (
@@ -18,7 +18,7 @@ const MobileHome = () => {
           <Header />
 
           <Box marginTop={"150px"}>
-            <Cities />
+            {/* <Cities /> */}
           </Box>
         </Box>
       </Box>

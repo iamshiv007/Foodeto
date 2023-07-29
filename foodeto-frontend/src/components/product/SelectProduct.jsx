@@ -48,10 +48,11 @@ const SelectProduct = () => {
       <SelectProductCard product={product} />
 
       {products &&
+        product !== {} &&
         products
           .filter(
             (product1) =>
-              product1._id !== id && product1.category === product.category
+              product1?._id !== id && product1?.category === product?.category
           )
           .map((product2) => <SelectProductCard product={product2} />)}
     </>
