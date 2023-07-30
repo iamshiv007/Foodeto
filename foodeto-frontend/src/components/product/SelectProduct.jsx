@@ -11,6 +11,7 @@ import StarRatingsComp from "./child/StarRatings";
 import SelectProductCard from "./child/SelectProductCard";
 import { toast } from "react-toastify";
 import { addToCartReset } from "../../featured/slices/cartSlice";
+import Loader from "../layout/loader/Loader";
 
 const SelectProduct = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const SelectProduct = () => {
         </Box>
       </Box>
 
-      <SelectProductCard product={product} />
+      {product ? <SelectProductCard product={product} /> : <Loader />}
 
       {products &&
         product !== {} &&

@@ -1,10 +1,20 @@
 import { Box, Button, Flex, Link, Text } from "@chakra-ui/react";
-import { PriceTag } from "./PriceTag";
 import { CartProductMeta } from "./CartProductMeta";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { removeToCart } from "../../../featured/actions/cartActions";
+import { toast } from "react-toastify";
 
 export const CartItem = ({ cartItem }) => {
-  const { name, image, quantity, price } = cartItem;
+  const { name, image, quantity, price, product } = cartItem;
+
+  const dispatch = useDispatch();
+
+  const removeToCartFun = (id) => {
+    dispatch(removeToCart(id));
+    toast.success("Item Remove From cart");
+  };
+
   return (
     <Flex
       direction={{
@@ -24,10 +34,13 @@ export const CartItem = ({ cartItem }) => {
           base: "none",
           md: "flex",
         }}
+        align={"center"}
       >
         <QauntityButtons quantity={quantity} />
-        <PriceTag price={price} currency={"INR"} />
-        <Button>
+        <Text fontSize={"sm"}>
+          ₹{price} X {quantity}
+        </Text>
+        <Button colorScheme="red" onClick={() => removeToCartFun(product)}>
           <AiFillDelete />
         </Button>
       </Flex>
@@ -43,11 +56,13 @@ export const CartItem = ({ cartItem }) => {
           md: "none",
         }}
       >
-        <Link fontSize="sm" textDecor="underline">
-          Delete
-        </Link>
+        <Button colorScheme="red" onClick={() => removeToCartFun(product)}>
+          <AiFillDelete />
+        </Button>
+        <Text fontSize={"sm"}>
+          ₹{price} X {quantity}
+        </Text>
         <QauntityButtons quantity={quantity} />
-        <PriceTag price={price} currency={"INR"} />
       </Flex>
     </Flex>
   );

@@ -1,56 +1,55 @@
 import {
+  Box,
   Button,
-  Flex,
-  Heading,
-  Link,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
   Stack,
   Text,
-  useColorModeValue as mode,
-} from '@chakra-ui/react'
-import { FaArrowRight } from 'react-icons/fa'
-import { formatPrice } from './PriceTag'
+} from "@chakra-ui/react";
+import React from "react";
 
-const OrderSummaryItem = (props) => {
-  const { label, value, children } = props
+const CartOrderSummary = () => {
   return (
-    <Flex justify="space-between" fontSize="sm">
-      <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
-        {label}
-      </Text>
-      {value ? <Text fontWeight="medium">{value}</Text> : children}
-    </Flex>
-  )
-}
-
-export const CartOrderSummary = () => {
-  return (
-    <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
-      <Heading size="md">Order Summary</Heading>
-
-      <Stack spacing="6">
-        <OrderSummaryItem label="Subtotal" value={formatPrice(597)} />
-        <OrderSummaryItem label="Shipping + Tax">
-          <Link href="#" textDecor="underline">
-            Calculate shipping
-          </Link>
-        </OrderSummaryItem>
-        <OrderSummaryItem label="Coupon Code">
-          <Link href="#" textDecor="underline">
-            Add coupon code
-          </Link>
-        </OrderSummaryItem>
-        <Flex justify="space-between">
-          <Text fontSize="lg" fontWeight="semibold">
-            Total
-          </Text>
-          <Text fontSize="xl" fontWeight="extrabold">
-            {formatPrice(597)}
-          </Text>
-        </Flex>
+    <>
+      <Stack spacing="8" width="full">
+        <Card borderWidth={"1px"} borderColor={"rgba(0, 0, 0, 0.2)"}>
+          <CardHeader fontWeight={"bold"} fontSize={"xl"}>
+            Order Summary
+          </CardHeader>
+          <CardBody>
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Text>Total Price</Text>
+              <Text>XXXX</Text>
+            </Box>
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Text>Discount</Text>
+              <Text>XXXX</Text>
+            </Box>
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Text>Shipping</Text>
+              <Text>XXXX</Text>
+            </Box>
+            <Box
+              marginTop={"8px"}
+              display={"flex"}
+              justifyContent={"space-between"}
+            >
+              <Text>Amount to pay</Text>
+              <Text>XXXX</Text>
+            </Box>
+          </CardBody>
+          <CardFooter>
+            {" "}
+            <Button width={"100%"} colorScheme="teal">
+              Checkout
+            </Button>
+          </CardFooter>
+        </Card>
       </Stack>
-      <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
-        Checkout
-      </Button>
-    </Stack>
-  )
-}
+    </>
+  );
+};
+
+export default CartOrderSummary;

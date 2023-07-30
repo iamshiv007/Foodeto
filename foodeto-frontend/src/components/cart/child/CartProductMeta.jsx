@@ -1,7 +1,6 @@
 import {
   Box,
-  Image,
-  Link,
+  Img,
   Stack,
   Text,
   useColorModeValue as mode,
@@ -15,16 +14,18 @@ export const CartProductMeta = (props) => {
   } = props;
   return (
     <Stack direction="row" spacing="5" width="full">
-      <Image
-        rounded="lg"
-        width="120px"
-        height="120px"
-        fit="cover"
-        src={image}
-        alt={name}
-        draggable="false"
-        loading="lazy"
-      />
+      <Box width="150px" height="120px">
+        <Img
+          rounded="lg"
+          height={"100%"}
+          width={"100%"}
+          src={image}
+          alt={name}
+          draggable="false"
+          loading="lazy"
+          objectFit={"cover"}
+        />
+      </Box>
       <Box>
         <Stack spacing="0.5">
           <Text fontWeight="medium">{name}</Text>
