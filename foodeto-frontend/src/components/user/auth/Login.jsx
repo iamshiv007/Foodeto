@@ -59,7 +59,7 @@ const Login = () => {
           padding={"10px"}
         >
           <Box
-            width={{ base: "96%", md: "500px" }}
+            width={{ base: "100%", md: "500px" }}
             display={"flex"}
             flexDirection={"column"}
             gap={3}
