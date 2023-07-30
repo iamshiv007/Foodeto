@@ -10,7 +10,20 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const CartOrderSummary = () => {
+const CartOrderSummary = ({ cartItems }) => {
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  const discount = cartItems.reduce(
+    (acc, item) => acc + (item.price * item.quantity * item.discount) / 100,
+    0
+  );
+  const finalAmountPay =
+    totalPrice - discount > 2000
+      ? totalPrice - discount
+      : totalPrice - discount + 100;
+
   return (
     <>
       <Stack spacing="8" width="full">
@@ -21,15 +34,15 @@ const CartOrderSummary = () => {
           <CardBody>
             <Box display={"flex"} justifyContent={"space-between"}>
               <Text>Total Price</Text>
-              <Text>XXXX</Text>
+              <Text>₹{totalPrice}</Text>
             </Box>
             <Box display={"flex"} justifyContent={"space-between"}>
               <Text>Discount</Text>
-              <Text>XXXX</Text>
+              <Text>₹{discount}</Text>
             </Box>
             <Box display={"flex"} justifyContent={"space-between"}>
               <Text>Shipping</Text>
-              <Text>XXXX</Text>
+              <Text>{totalPrice - discount > 2000 ? "free" : "₹100"}</Text>
             </Box>
             <Box
               marginTop={"8px"}
@@ -37,7 +50,7 @@ const CartOrderSummary = () => {
               justifyContent={"space-between"}
             >
               <Text>Amount to pay</Text>
-              <Text>XXXX</Text>
+              <Text>₹{finalAmountPay}</Text>
             </Box>
           </CardBody>
           <CardFooter>

@@ -11,6 +11,7 @@ export const CartProductMeta = (props) => {
     image,
     name,
     description = " Caffè latte hello Sab Badhiya Hai kya Haya to Sab badhiya Hai",
+    discount,
   } = props;
   return (
     <Stack direction="row" spacing="5" width="full">
@@ -32,6 +33,17 @@ export const CartProductMeta = (props) => {
           <Text color={mode("gray.600", "gray.400")} fontSize="sm">
             {description}
           </Text>
+          <Text
+            marginTop={"5px"}
+            padding={"1px 6px"}
+            fontSize={"xs"}
+            color={"white"}
+            background={"green.300"}
+            width={"fit-content"}
+            borderRadius={"3px"}
+          >
+            {discount} % discount
+          </Text>{" "}
         </Stack>
       </Box>
     </Stack>

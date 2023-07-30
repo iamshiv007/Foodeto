@@ -40,7 +40,7 @@ export const Cart = () => {
             Your Cart Is Empty
           </Text>
           <NavLink to="/products?category=All">
-            <Text color={"blue"}> Go to Shop</Text>
+            <Text color={"blue"}>👉 Go to Shop</Text>
           </NavLink>
         </Box>
       ) : (
@@ -94,9 +94,9 @@ export const Cart = () => {
             </Stack>
 
             <Flex direction="column" align="center" flex="1">
-              <CartOrderSummary />
+              <CartOrderSummary cartItems={cartItems} />
               <HStack mt="6" fontWeight="semibold">
-                <p>Still hungry</p>
+                <p>Still hungry 😋</p>
                 <NavLink to="/products?category=All">
                   <Text color={mode("blue.500", "blue.200")}>
                     {" "}

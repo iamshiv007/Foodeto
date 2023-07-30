@@ -17,7 +17,7 @@ root.render(
       <App />
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1500}
       // Other default options can be added here
       />
     </React.StrictMode>

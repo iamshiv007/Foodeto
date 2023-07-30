@@ -1,12 +1,15 @@
-import { Box, Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { CartProductMeta } from "./CartProductMeta";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { removeToCart } from "../../../featured/actions/cartActions";
+import { addToCart, removeToCart } from "../../../featured/actions/cartActions";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 export const CartItem = ({ cartItem }) => {
-  const { name, image, quantity, price, product } = cartItem;
+  const [newQuantity, setNewQuantity] = useState(1);
+
+  const { name, image, quantity, price, product, discount } = cartItem;
 
   const dispatch = useDispatch();
 
@@ -14,6 +17,15 @@ export const CartItem = ({ cartItem }) => {
     dispatch(removeToCart(id));
     toast.success("Item Remove From cart");
   };
+
+  const addToCartFun = async (q) => {
+    await dispatch(addToCart(product, q));
+    toast.success("Product Quantity Updated");
+  };
+
+  useEffect(() => {
+    setNewQuantity(quantity);
+  }, []);
 
   return (
     <Flex
@@ -24,7 +36,7 @@ export const CartItem = ({ cartItem }) => {
       justify="space-between"
       gap={3}
     >
-      <CartProductMeta name={name} image={image} />
+      <CartProductMeta discount={discount} name={name} image={image} />
 
       {/* Desktop */}
       <Flex
@@ -36,9 +48,13 @@ export const CartItem = ({ cartItem }) => {
         }}
         align={"center"}
       >
-        <QauntityButtons quantity={quantity} />
+        <QauntityButtons
+          addToCartFun={addToCartFun}
+          newQuantity={newQuantity}
+          setNewQuantity={setNewQuantity}
+        />
         <Text fontSize={"sm"}>
-          ₹{price} X {quantity}
+          ₹{price} X {newQuantity}
         </Text>
         <Button colorScheme="red" onClick={() => removeToCartFun(product)}>
           <AiFillDelete />
@@ -60,26 +76,38 @@ export const CartItem = ({ cartItem }) => {
           <AiFillDelete />
         </Button>
         <Text fontSize={"sm"}>
-          ₹{price} X {quantity}
+          ₹{price} X {newQuantity}
         </Text>
-        <QauntityButtons quantity={quantity} />
+        <QauntityButtons
+          addToCartFun={addToCartFun}
+          newQuantity={newQuantity}
+          setNewQuantity={setNewQuantity}
+        />
       </Flex>
     </Flex>
   );
 };
 
-const QauntityButtons = ({ quantity }) => {
-  const setQuantity = () => {};
+const QauntityButtons = ({ addToCartFun, newQuantity, setNewQuantity }) => {
   return (
     <Box display={"flex"} alignItems={"center"} gap={3}>
       <Button
-        onClick={() => setQuantity(quantity === 1 ? 1 : quantity - 1)}
+        onClick={() => {
+          setNewQuantity(newQuantity === 1 ? 1 : newQuantity - 1);
+          addToCartFun(newQuantity === 1 ? 1 : newQuantity - 1);
+        }}
         fontSize={"xl"}
       >
         -
       </Button>
-      <Text>{quantity}</Text>
-      <Button onClick={() => setQuantity(quantity + 1)} fontSize={"xl"}>
+      <Text>{newQuantity}</Text>
+      <Button
+        onClick={() => {
+          setNewQuantity(newQuantity + 1);
+          addToCartFun(newQuantity + 1);
+        }}
+        fontSize={"xl"}
+      >
         +
       </Button>
     </Box>
