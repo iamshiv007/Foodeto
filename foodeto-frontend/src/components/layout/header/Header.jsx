@@ -24,6 +24,7 @@ const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { cartItems } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -72,7 +73,7 @@ const Header = () => {
             </Box>
           </NavLink>
 
-          <NavLink to="/">
+          <NavLink to="/cart">
             <Box
               _hover={{ background: "tomato;" }}
               borderRadius={"10px"}
@@ -82,7 +83,25 @@ const Header = () => {
               alignItems={"center"}
               color={"white"}
             >
-              <FaShoppingCart /> Cart
+              <FaShoppingCart /> Cart{" "}
+              {cartItems.length !== 0 ? (
+                <Text
+                  fontSize={"xs"}
+                  color={"white"}
+                  background={"tomato"}
+                  borderRadius={"100%"}
+                  padding={"3px"}
+                  width={"20px"}
+                  height={"20px"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  {cartItems.length}
+                </Text>
+              ) : (
+                ""
+              )}
             </Box>
           </NavLink>
 
@@ -228,7 +247,7 @@ const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
                   <PiBowlFoodFill /> products
                 </Box>
               </NavLink>
-              <NavLink to="/">
+              <NavLink to="/cart">
                 <Box
                   _hover={{
                     transform: "scale(1.1)",

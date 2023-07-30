@@ -9,12 +9,15 @@ import { Box, Text } from "@chakra-ui/react";
 import Header from "../layout/header/Header";
 import StarRatingsComp from "./child/StarRatings";
 import SelectProductCard from "./child/SelectProductCard";
+import { toast } from "react-toastify";
+import { addToCartReset } from "../../featured/slices/cartSlice";
 
 const SelectProduct = () => {
   const dispatch = useDispatch();
 
   const { product } = useSelector((state) => state.productDetails);
   const { products } = useSelector((state) => state.products);
+  const { cartAdded } = useSelector((state) => state.cart);
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,7 +28,12 @@ const SelectProduct = () => {
     if (product && product !== {} && product._id === id) {
       dispatch(getPartnerProducts(product.partner._id));
     }
-  }, [product, dispatch, id]);
+
+    if (cartAdded) {
+      toast.success("Product Added to cart");
+      dispatch(addToCartReset());
+    }
+  }, [product, dispatch, id, cartAdded]);
 
   return (
     <>
@@ -54,7 +62,9 @@ const SelectProduct = () => {
             (product1) =>
               product1?._id !== id && product1?.category === product?.category
           )
-          .map((product2) => <SelectProductCard product={product2} />)}
+          .map((product2) => (
+            <SelectProductCard key={product2._id} product={product2} />
+          ))}
     </>
   );
 };

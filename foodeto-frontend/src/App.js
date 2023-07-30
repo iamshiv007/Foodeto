@@ -18,6 +18,7 @@ import EditProduct from './components/partner/product/EditProduct';
 import Dashboard from './components/partner/dashboard/Dashboard';
 import CategoryProducts from './components/product/CategoryProducts';
 import SelectProduct from './components/product/SelectProduct';
+import { Cart } from './components/cart/Cart';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
 
           <Route exact path='/partner/product/update/:id' element={<EditProduct />} />
           <Route exact path='/product/:id' element={<SelectProduct />} />
+          <Route exact path='/cart' element={<Cart />} />
 
           <Route path='*' element={<NotFound />} />
 

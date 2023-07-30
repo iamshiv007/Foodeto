@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import StarRatingsComp from "./StarRatings";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../featured/actions/cartActions";
 
 const SelectProductCard = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const addToCartFun = async (id) => {
+    setLoading(true);
+    await dispatch(addToCart(id, quantity));
+    setLoading(false);
+    setQuantity(1);
+  };
+
   return (
     <>
       <Box
@@ -62,12 +76,27 @@ const SelectProductCard = ({ product }) => {
 
             <Box display={"flex"} gap={4}>
               <Box display={"flex"} alignItems={"center"} gap={3}>
-                <Button fontSize={"xl"}>-</Button>
-                <Text>1</Text>
-                <Button fontSize={"xl"}>+</Button>
+                <Button
+                  onClick={() => setQuantity(quantity === 1 ? 1 : quantity - 1)}
+                  fontSize={"xl"}
+                >
+                  -
+                </Button>
+                <Text>{quantity}</Text>
+                <Button
+                  onClick={() => setQuantity(quantity + 1)}
+                  fontSize={"xl"}
+                >
+                  +
+                </Button>
               </Box>
 
-              <Button variant="solid" colorScheme="teal">
+              <Button
+                isLoading={loading}
+                onClick={() => addToCartFun(product._id)}
+                variant="solid"
+                colorScheme="teal"
+              >
                 Add To Cart
               </Button>
             </Box>

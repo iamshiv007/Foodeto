@@ -6,6 +6,18 @@ import authSlice from "./featured/slices/authSlice";
 import productSlice from "./featured/slices/productSlice";
 import productsSlice from "./featured/slices/productsSlice";
 import productDetailsSlice from "./featured/slices/productDetailsSlice";
+import cartSlice from "./featured/slices/cartSlice";
+
+let preloadedState = {
+    cart: {
+        cartItems: localStorage.getItem("cartItems")
+            ? JSON.parse(localStorage.getItem("cartItems"))
+            : [],
+        shippingInfo: localStorage.getItem("shippingInfo")
+            ? JSON.parse(localStorage.getItem("shippingInfo"))
+            : {}
+    }
+}
 
 export const store = configureStore({
     reducer: {
@@ -14,7 +26,9 @@ export const store = configureStore({
         authPartner: authSlice,
         product: productSlice,
         productDetails: productDetailsSlice,
-        products: productsSlice
+        products: productsSlice,
+        cart: cartSlice
     },
+    preloadedState,
     middleware: [ThunkMiddleware]
 })
