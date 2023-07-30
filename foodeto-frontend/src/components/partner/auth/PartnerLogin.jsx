@@ -62,7 +62,7 @@ const PartnerLogin = () => {
           padding={"10px"}
         >
           <Box
-            width={{ base: "90%", md: "500px" }}
+            width={{ base: "96%", md: "500px" }}
             display={"flex"}
             flexDirection={"column"}
             gap={3}

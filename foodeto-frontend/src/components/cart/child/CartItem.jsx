@@ -25,7 +25,7 @@ export const CartItem = ({ cartItem }) => {
 
   useEffect(() => {
     setNewQuantity(quantity);
-  }, []);
+  }, [quantity]);
 
   return (
     <Flex

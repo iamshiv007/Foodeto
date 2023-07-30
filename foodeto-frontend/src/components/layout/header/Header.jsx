@@ -1,38 +1,67 @@
-import {
-  Box,
-  Text,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  IconButton,
-} from "@chakra-ui/react";
 import React, { Fragment } from "react";
-import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { logout } from "../../../featured/actions/userActions";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FiMenu, FiLogOut, FiLogIn } from "react-icons/fi";
-import { AiTwotoneHome } from "react-icons/ai";
+import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
+import { FiLogOut, FiLogIn } from "react-icons/fi";
 import { PiBowlFoodFill } from "react-icons/pi";
+import { AiTwotoneHome } from "react-icons/ai";
+import { logout } from "../../../featured/actions/userActions";
+import MobileNavbar from "./MobileNavbar";
+import Logo from "../../../images/Logo.png";
 
 const Header = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { cartItems } = useSelector((state) => state.cart);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { cartItems } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const logoutHandler = () => {
     dispatch(logout());
-    onClose();
     toast.success("Logout Successfully");
+    navigate("/");
   };
+
+  const navbarData = [
+    { name: "Home", icon: <AiTwotoneHome />, link: "/" },
+    { name: "Products", icon: <PiBowlFoodFill />, link: "/products" },
+    {
+      name:
+        cartItems.length !== 0 ? (
+          <>
+            {" "}
+            <Text>Cart</Text>{" "}
+            <Text
+              fontSize={"xs"}
+              color={"white"}
+              background={"tomato"}
+              borderRadius={"100%"}
+              padding={"3px"}
+              width={"20px"}
+              height={"20px"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              {cartItems.length}
+            </Text>
+          </>
+        ) : (
+          <Text>Cart</Text>
+        ),
+      icon: <FaShoppingCart />,
+      link: "/cart",
+    },
+    isAuthenticated
+      ? {
+          name: "Profile",
+          icon: <FaUserCircle />,
+          link: "/profile",
+        }
+      : { name: "Login", icon: <FiLogIn />, link: "/login" },
+  ];
 
   return (
     <Fragment>
@@ -40,280 +69,62 @@ const Header = () => {
         display={{ base: "none", md: "flex" }}
         justifyContent={"space-between"}
         padding={"10px 30px"}
-        background={"rgba(135, 218, 237)"}
+        background={"teal"}
         position={"sticky"}
         top={"0"}
         zIndex={10}
+        alignItems={"center"}
       >
-        <Box>
-          <NavLink to="/">
+        <NavLink to="/">
+          <Box display={"flex"} alignItems={"center"} gap={5}>
+            <Image width="44px" objectFit={"contain"} src={Logo} alt="Logo" />
             <Text
-              fontSize={"xl"}
+              fontSize={"3xl"}
               fontStyle={"italic"}
               fontWeight={"bold"}
               color={"tomato"}
             >
               Foodeto
             </Text>
-          </NavLink>
-        </Box>
+          </Box>
+        </NavLink>
 
-        <Box gap={3} display={"flex"}>
-          <NavLink to="/products?category=All">
-            <Box
-              _hover={{ background: "tomato;" }}
-              borderRadius={"10px"}
-              padding={"4px 10px"}
-              display={"flex"}
-              gap={2}
-              alignItems={"center"}
-              color={"white"}
-            >
-              <PiBowlFoodFill /> products
-            </Box>
-          </NavLink>
-
-          <NavLink to="/cart">
-            <Box
-              _hover={{ background: "tomato;" }}
-              borderRadius={"10px"}
-              padding={"4px 10px"}
-              display={"flex"}
-              gap={2}
-              alignItems={"center"}
-              color={"white"}
-            >
-              <FaShoppingCart /> Cart{" "}
-              {cartItems.length !== 0 ? (
-                <Text
-                  fontSize={"xs"}
-                  color={"white"}
-                  background={"tomato"}
-                  borderRadius={"100%"}
-                  padding={"3px"}
-                  width={"20px"}
-                  height={"20px"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  {cartItems.length}
-                </Text>
-              ) : (
-                ""
-              )}
-            </Box>
-          </NavLink>
+        <Box gap={3} display={"flex"} alignItems={"center"}>
+          {navbarData.map((data) => (
+            <NavLink to={data.link}>
+              <Box
+                _hover={{ background: "tomato;" }}
+                borderRadius={"6px"}
+                padding={"4px 10px"}
+                display={"flex"}
+                gap={2}
+                alignItems={"center"}
+                color={"white"}
+                fontWeight={"bold"}
+              >
+                {data.icon} {data.name}
+              </Box>
+            </NavLink>
+          ))}
 
           {isAuthenticated && (
-            <NavLink to="/profile">
-              <Box
-                _hover={{ background: "tomato;" }}
-                borderRadius={"10px"}
-                padding={"4px 10px"}
+            <Box borderRadius={"6px"} padding={"4px 10px"}>
+              <Button
+                onClick={logoutHandler}
                 display={"flex"}
                 gap={2}
                 alignItems={"center"}
-                color={"white"}
+                fontSize={"xl"}
               >
-                <FaUserCircle /> Profile
-              </Box>
-            </NavLink>
-          )}
-
-          {isAuthenticated ? (
-            <Box
-              _hover={{ background: "tomato" }}
-              borderRadius={"10px"}
-              padding={"4px 10px"}
-              display={"flex"}
-              gap={2}
-              alignItems={"center"}
-              color={"white"}
-              cursor={"pointer"}
-              onClick={logoutHandler}
-            >
-              <FiLogOut /> Logout
+                <FiLogOut /> Logout
+              </Button>
             </Box>
-          ) : (
-            <NavLink to="/login">
-              <Box
-                _hover={{ background: "tomato;" }}
-                borderRadius={"10px"}
-                padding={"4px 10px"}
-                display={"flex"}
-                gap={2}
-                alignItems={"center"}
-                color={"white"}
-              >
-                <FiLogIn /> Login
-              </Box>
-            </NavLink>
           )}
         </Box>
       </Box>
-      <MobileNavbar
-        logoutHandler={logoutHandler}
-        isOpen={isOpen}
-        onClose={onClose}
-        onOpen={onOpen}
-      />
+      <MobileNavbar logoutHandler={logoutHandler} />
     </Fragment>
   );
 };
 
 export default Header;
-
-const MobileNavbar = ({ logoutHandler, isOpen, onClose, onOpen }) => {
-  const btnRef = React.useRef();
-
-  const { isAuthenticated } = useSelector((state) => state.auth);
-
-  return (
-    <>
-      <Box display={"flex"} justifyContent={"flex-end"}>
-        <IconButton
-          display={{ base: "flex", md: "none" }}
-          ref={btnRef}
-          onClick={onOpen}
-          variant="outline"
-          color={"black"}
-          aria-label="Call Sage"
-          fontSize="20px"
-          icon={<FiMenu />}
-          position={"fixed"}
-          right={"15px"}
-          top="15px"
-        />
-      </Box>
-      <Drawer
-        size="xs"
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        display={{ base: "block", sm: "none" }}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>
-            <NavLink to="/">
-              <Box>
-                <Text
-                  _hover={{
-                    transform: "scale(1.1)",
-                    transition: "all 0.1s",
-                  }}
-                  fontSize={"xl"}
-                  fontStyle={"italic"}
-                  fontWeight={"bold"}
-                  color={"tomato"}
-                  padding={"4px 10px"}
-                >
-                  Foodeto
-                </Text>
-              </Box>
-            </NavLink>
-          </DrawerHeader>
-
-          <DrawerBody>
-            <Box display={"flex"} flexDirection={"column"} gap={3}>
-              <NavLink to="/">
-                <Box
-                  _hover={{
-                    transform: "scale(1.1)",
-                    transition: "all 0.1s",
-                  }}
-                  padding={"4px 10px"}
-                  display={"flex"}
-                  gap={2}
-                  alignItems={"center"}
-                >
-                  <AiTwotoneHome /> Home
-                </Box>
-              </NavLink>
-              <NavLink to="/products?category=All">
-                <Box
-                  _hover={{
-                    transform: "scale(1.1)",
-                    transition: "all 0.1s",
-                  }}
-                  padding={"4px 10px"}
-                  display={"flex"}
-                  gap={2}
-                  alignItems={"center"}
-                >
-                  <PiBowlFoodFill /> products
-                </Box>
-              </NavLink>
-              <NavLink to="/cart">
-                <Box
-                  _hover={{
-                    transform: "scale(1.1)",
-                    transition: "all 0.1s",
-                  }}
-                  padding={"4px 10px"}
-                  display={"flex"}
-                  gap={2}
-                  alignItems={"center"}
-                >
-                  <FaShoppingCart /> Cart
-                </Box>
-              </NavLink>
-
-              {isAuthenticated && (
-                <NavLink to="/profile">
-                  <Box
-                    _hover={{
-                      transform: "scale(1.1)",
-                      transition: "all 0.1s",
-                    }}
-                    padding={"4px 10px"}
-                    display={"flex"}
-                    gap={2}
-                    alignItems={"center"}
-                  >
-                    <FaUserCircle /> Profile
-                  </Box>
-                </NavLink>
-              )}
-
-              {isAuthenticated ? (
-                <Box
-                  _hover={{
-                    transform: "scale(1.1)",
-                    transition: "all 0.1s",
-                  }}
-                  padding={"4px 10px"}
-                  display={"flex"}
-                  gap={2}
-                  alignItems={"center"}
-                  cursor={"pointer"}
-                  onClick={logoutHandler}
-                >
-                  <FiLogOut /> Logout
-                </Box>
-              ) : (
-                <NavLink to="/login">
-                  <Box
-                    _hover={{
-                      transform: "scale(1.1)",
-                      transition: "all 0.1s",
-                    }}
-                    padding={"4px 10px"}
-                    display={"flex"}
-                    gap={2}
-                    alignItems={"center"}
-                  >
-                    <FiLogIn /> Login
-                  </Box>
-                </NavLink>
-              )}
-            </Box>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
-  );
-};

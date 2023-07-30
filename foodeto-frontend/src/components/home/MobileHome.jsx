@@ -1,8 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import Header from "../../layout/header/Header";
-import Cake2 from "../../../foodeto images/cakes/kaouther-djouada-hcEDfkiVmMI-unsplash.jpg";
-// import Cities from "../../product/child/Cities";
+import Header from "../layout/header/Header";
+import Cake2 from "../../foodeto images/cakes/kaouther-djouada-hcEDfkiVmMI-unsplash.jpg";
 
 const MobileHome = () => {
   return (
@@ -16,10 +15,6 @@ const MobileHome = () => {
           width={"100vw"}
         >
           <Header />
-
-          <Box marginTop={"150px"}>
-            {/* <Cities /> */}
-          </Box>
         </Box>
       </Box>
     </>
