@@ -16,6 +16,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import MetaData from "../../layout/metaData/MetaData";
 import { clearErrors } from "../../../featured/slices/authSlice";
 import Logo from "../../../images/Logo.png";
+import Layout from "../../layout/Layout";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -77,136 +78,137 @@ const Register = () => {
 
   return (
     <Fragment>
-      <MetaData title="Signup to -- Foodeto" />
+      <Layout>
+        <MetaData title="Signup to -- Foodeto" />
 
-      <form onSubmit={handleRegister} action="" method="post">
-        <Box
-          minHeight={"100vh"}
-          display={"flex"}
-          justifyContent={"center"}
-          padding={"10px"}
-        >
+        <form onSubmit={handleRegister} action="" method="post">
           <Box
-            width={{ base: "100%", md: "500px" }}
             display={"flex"}
-            flexDirection={"column"}
-            gap={3}
-            borderWidth={{ base: "md", md: "1px" }}
-            borderRadius={"8px"}
-            padding={"20px"}
-            height={"fit-content"}
-            borderColor={"blackAlpha.300"}
+            justifyContent={"center"}
+            padding={"10px"}
           >
-            <Text
-              colorScheme="teal"
-              align={"center"}
-              color="tomato"
-              fontSize="2xl"
+            <Box
+              width={{ base: "100%", md: "500px" }}
               display={"flex"}
-              alignItems={"center"}
-              justifyContent={"center"}
+              flexDirection={"column"}
               gap={3}
-              marginBottom={"10px"}
+              borderWidth={{ base: "md", md: "1px" }}
+              borderRadius={"8px"}
+              padding={"20px"}
+              height={"fit-content"}
+              borderColor={"blackAlpha.300"}
             >
-              <Image width="44px" height={"44px"} src={Logo} alt="logo" />{" "}
-              Signup to Foodeto
-            </Text>
-            <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input onChange={collectData} type="text" name="name" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input onChange={collectData} type="email" name="email" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Mobile</FormLabel>
-              <Input onChange={collectData} type="Number" name="mobile" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Password</FormLabel>
-              <Input onChange={collectData} type="text" name="password" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Confirm Password</FormLabel>
-              <Input
-                onChange={collectData}
-                type="password"
-                name="confirmPassword"
-              />
-            </FormControl>
-            <FormControl
-              display={"flex"}
-              flexDir={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <FormLabel>Avatar</FormLabel>
-              <Input
-                onChange={collectData}
-                hidden
-                id="avatar"
-                type="file"
-                name="avatar"
-                accept="image/*"
-              />
-              <label htmlFor="avatar">
-                <Box
-                  borderRadius={"100%"}
-                  border="1px"
-                  borderColor="gray.200"
-                  w="64px"
-                  h="64px"
-                >
-                  <img
-                    cursor={"pointer"}
-                    w="100%"
-                    src={avatarPreview}
-                    alt="Dan Abramov"
-                  />
-                </Box>
-              </label>
-            </FormControl>
+              <Text
+                colorScheme="teal"
+                align={"center"}
+                color="tomato"
+                fontSize="2xl"
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={3}
+                marginBottom={"10px"}
+              >
+                <Image width="44px" height={"44px"} src={Logo} alt="logo" />{" "}
+                Signup to Foodeto
+              </Text>
+              <FormControl isRequired>
+                <FormLabel>Name</FormLabel>
+                <Input onChange={collectData} type="text" name="name" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input onChange={collectData} type="email" name="email" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Mobile</FormLabel>
+                <Input onChange={collectData} type="Number" name="mobile" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Password</FormLabel>
+                <Input onChange={collectData} type="text" name="password" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  onChange={collectData}
+                  type="password"
+                  name="confirmPassword"
+                />
+              </FormControl>
+              <FormControl
+                display={"flex"}
+                flexDir={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <FormLabel>Avatar</FormLabel>
+                <Input
+                  onChange={collectData}
+                  hidden
+                  id="avatar"
+                  type="file"
+                  name="avatar"
+                  accept="image/*"
+                />
+                <label htmlFor="avatar">
+                  <Box
+                    borderRadius={"100%"}
+                    border="1px"
+                    borderColor="gray.200"
+                    w="64px"
+                    h="64px"
+                  >
+                    <img
+                      cursor={"pointer"}
+                      w="100%"
+                      src={avatarPreview}
+                      alt="Dan Abramov"
+                    />
+                  </Box>
+                </label>
+              </FormControl>
 
-            <Button
-              type="submit"
-              size="sm"
-              isLoading={loading}
-              loadingText="Processing"
-              colorScheme="teal"
-            >
-              Sign Up
-            </Button>
+              <Button
+                type="submit"
+                size="sm"
+                isLoading={loading}
+                loadingText="Processing"
+                colorScheme="teal"
+              >
+                Sign Up
+              </Button>
 
-            <Box
-              textAlign={"center"}
-              display={"flex"}
-              gap={2}
-              justifyContent="center"
-            >
-              <Text>Already have an acount?</Text>
-              <NavLink to="/login">
-                <Text fontSize={"sm"} textColor={"tomato"}>
-                  Login
-                </Text>
-              </NavLink>
-            </Box>
-            <Box
-              textAlign={"center"}
-              display={"flex"}
-              gap={2}
-              justifyContent="center"
-            >
-              <Text>Register as a Partner</Text>
-              <NavLink to="/partner/signup">
-                <Text fontSize={"sm"} textColor={"tomato"}>
-                  Signup as Partner
-                </Text>
-              </NavLink>
+              <Box
+                textAlign={"center"}
+                display={"flex"}
+                gap={2}
+                justifyContent="center"
+              >
+                <Text>Already have an acount?</Text>
+                <NavLink to="/login">
+                  <Text fontSize={"sm"} textColor={"tomato"}>
+                    Login
+                  </Text>
+                </NavLink>
+              </Box>
+              <Box
+                textAlign={"center"}
+                display={"flex"}
+                gap={2}
+                justifyContent="center"
+              >
+                <Text>Register as a Partner</Text>
+                <NavLink to="/partner/signup">
+                  <Text fontSize={"sm"} textColor={"tomato"}>
+                    Signup as Partner
+                  </Text>
+                </NavLink>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </form>
+        </form>
+      </Layout>
     </Fragment>
   );
 };

@@ -1,21 +1,19 @@
 import React, { Fragment } from "react";
-import Header from "../layout/header/Header";
 import { Text } from "@chakra-ui/react";
 import ProductList from "./child/ProductList";
 import { useLocation } from "react-router-dom";
 import { getAllProducts } from "../../featured/actions/productActions";
 import FoodMenu from "./child/FoodMenu";
+import Layout from "../layout/Layout";
 
 const CategoryProducts = () => {
-  // const [myAddress, setMyAddress] = useState("");
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
 
   return (
     <Fragment>
-      <Header />
-      <>
+      <Layout>
         <FoodMenu />
         <Text
           fontSize={{ base: "2xl", md: "3xl" }}
@@ -28,9 +26,8 @@ const CategoryProducts = () => {
           link={"/product"}
           myFunction={getAllProducts}
           category={category}
-          // address={myAddress}
         />
-      </>
+      </Layout>
     </Fragment>
   );
 };

@@ -118,7 +118,6 @@ const MobileNavbar = () => {
                 <Text
                   fontSize={"4xl"}
                   fontStyle={"italic"}
-                  fontWeight={"bold"}
                   color={"tomato"}
                   padding={"0 10px"}
                 >
@@ -133,7 +132,7 @@ const MobileNavbar = () => {
               display={"flex"}
               alignItems={"center"}
               flexDirection={"column"}
-              gap={5}
+              gap={6}
             >
               {navbarData.map((data) => (
                 <NavLink key={data.name} to={data.link}>

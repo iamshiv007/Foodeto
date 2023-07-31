@@ -50,7 +50,6 @@ const ProductList = ({ myFunction, link, category, address }) => {
               />
             ))}
           </Box>
-          <Footer />
         </>
       ) : (
         <Box

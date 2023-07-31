@@ -68,22 +68,18 @@ const Header = () => {
       <Box
         display={{ base: "none", md: "flex" }}
         justifyContent={"space-between"}
-        padding={"10px 30px"}
+        padding={"12px 30px"}
         background={"teal"}
         position={"sticky"}
         top={"0"}
         zIndex={10}
         alignItems={"center"}
+        height={"12vh"}
       >
         <NavLink to="/">
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Image width="44px" objectFit={"contain"} src={Logo} alt="Logo" />
-            <Text
-              fontSize={"3xl"}
-              fontStyle={"italic"}
-              fontWeight={"bold"}
-              color={"tomato"}
-            >
+            <Text fontSize={"3xl"} fontStyle={"italic"} color={"tomato"}>
               Foodeto
             </Text>
           </Box>
@@ -100,7 +96,6 @@ const Header = () => {
                 gap={2}
                 alignItems={"center"}
                 color={"white"}
-                fontWeight={"bold"}
               >
                 {data.icon} {data.name}
               </Box>
