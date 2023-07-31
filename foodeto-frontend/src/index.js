@@ -7,6 +7,7 @@ import { store } from './store';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import "react-alice-carousel/lib/alice-carousel.css";
 
 axios.defaults.withCredentials = true
 

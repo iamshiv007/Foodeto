@@ -1,6 +1,7 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Logo from "../../../images/Logo.png";
 
 const Footer = () => {
   return (
@@ -29,12 +30,38 @@ const Footer = () => {
             ))}
           </Flex>
 
+          <Box
+            display={{ base: "none", md: "flex" }}
+            flexDirection="column"
+            alignItems={"center"}
+            gap={3}
+          >
+            <Image
+              borderWidth={"1px"}
+              borderColor={"white"}
+              width={"44px"}
+              objectFit={"contain"}
+              src={Logo}
+              alt="Logo"
+              borderStyle={"solid"}
+              borderRadius={"full"}
+            />
+            <Text textAlign={"center"} fontSize={"xl"} color={"white"}>
+              Never Compromise with costomer's satisfaction{" "}
+            </Text>
+          </Box>
+
           <Flex direction="column" gap={"2"}>
             <Text color="white" marginBottom={"4px"}>
-              Social Media
+              Follow me 👇
             </Text>
             {socialMedia.map((link) => (
-              <a key={link.name} href={link.link} target="_blank">
+              <a
+                key={link.name}
+                href={link.link}
+                rel="noreferrer"
+                target="_blank"
+              >
                 <Text
                   color="white"
                   fontSize="sm"

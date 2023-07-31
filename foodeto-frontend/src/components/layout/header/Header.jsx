@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Select, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { FiLogOut, FiLogIn } from "react-icons/fi";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { AiTwotoneHome } from "react-icons/ai";
+import { MdLocationOn } from "react-icons/md";
 import { logout } from "../../../featured/actions/userActions";
 import MobileNavbar from "./MobileNavbar";
 import Logo from "../../../images/Logo.png";
@@ -86,6 +87,14 @@ const Header = () => {
         </NavLink>
 
         <Box gap={3} display={"flex"} alignItems={"center"}>
+          <Select
+            defaultValue={"Jaipur"}
+            icon={<MdLocationOn />}
+            variant="flushed"
+            placeholder="Location"
+          >
+            <option value="Jaipur">Jaipur</option>
+          </Select>
           {navbarData.map((data) => (
             <NavLink to={data.link}>
               <Box

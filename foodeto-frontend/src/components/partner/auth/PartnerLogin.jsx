@@ -15,6 +15,7 @@ import MetaData from "../../layout/metaData/MetaData";
 import { login } from "../../../featured/actions/partnerActions";
 import Logo from "../../../images/Logo.png";
 import { clearErrors } from "../../../featured/slices/authPartnerSlice";
+import Layout from "../../layout/Layout";
 
 const PartnerLogin = () => {
   const [formData, setFormData] = useState({});
@@ -51,87 +52,89 @@ const PartnerLogin = () => {
 
   return (
     <Fragment>
-      <MetaData title="Login as Partner" />
-      <form onSubmit={handleLogin} action="" method="post">
-        <Box
-          margin={"auto"}
-          minHeight={"100vh"}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          padding={"10px"}
-        >
+      <Layout>
+        <MetaData title="Login as Partner" />
+        <form onSubmit={handleLogin} action="" method="post">
           <Box
-            width={{ base: "100%", md: "500px" }}
+            margin={"auto"}
+            minHeight={"100vh"}
             display={"flex"}
-            flexDirection={"column"}
-            gap={3}
-            borderWidth={{ base: "md", md: "1px" }}
-            borderRadius={"8px"}
-            padding={"20px"}
-            height={"fit-content"}
-            borderColor={"blackAlpha.300"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            padding={"10px"}
           >
-            <Text
-              colorScheme="teal"
-              align={"center"}
-              color="tomato"
-              fontSize="2xl"
+            <Box
+              width={{ base: "100%", md: "500px" }}
               display={"flex"}
-              alignItems={"center"}
-              justifyContent={"center"}
+              flexDirection={"column"}
               gap={3}
-              marginBottom={"10px"}
+              borderWidth={{ base: "md", md: "1px" }}
+              borderRadius={"8px"}
+              padding={"20px"}
+              height={"fit-content"}
+              borderColor={"blackAlpha.300"}
             >
-              <Image width="44px" height={"44px"} src={Logo} alt="logo" /> Login
-              as a Partner
-            </Text>
-            <FormControl isRequired>
-              <FormLabel fontSize={"16px"}>Email</FormLabel>
-              <Input onChange={collectData} type="email" name="email" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Password</FormLabel>
-              <Input onChange={collectData} type="password" name="password" />
-            </FormControl>
-            <Button
-              type="submit"
-              size="sm"
-              isLoading={loading}
-              loadingText="Processing"
-              colorScheme="teal"
-            >
-              Log In
-            </Button>
-            <Box
-              textAlign={"center"}
-              display={"flex"}
-              gap={2}
-              justifyContent="center"
-            >
-              <Text>Don't have any acount?</Text>
-              <NavLink to="/partner/signup">
-                <Text fontSize={"sm"} textColor={"tomato"}>
-                  Signup for Partner
-                </Text>
-              </NavLink>
-            </Box>{" "}
-            <Box
-              textAlign={"center"}
-              display={"flex"}
-              gap={2}
-              justifyContent="center"
-            >
-              <Text>Not a Partner?</Text>
-              <NavLink to="/login">
-                <Text fontSize={"sm"} textColor={"tomato"}>
-                  Login as User
-                </Text>
-              </NavLink>
-            </Box>{" "}
+              <Text
+                colorScheme="teal"
+                align={"center"}
+                color="tomato"
+                fontSize="2xl"
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={3}
+                marginBottom={"10px"}
+              >
+                <Image width="44px" height={"44px"} src={Logo} alt="logo" />{" "}
+                Login as a Partner
+              </Text>
+              <FormControl isRequired>
+                <FormLabel fontSize={"16px"}>Email</FormLabel>
+                <Input onChange={collectData} type="email" name="email" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Password</FormLabel>
+                <Input onChange={collectData} type="password" name="password" />
+              </FormControl>
+              <Button
+                type="submit"
+                size="sm"
+                isLoading={loading}
+                loadingText="Processing"
+                colorScheme="teal"
+              >
+                Log In
+              </Button>
+              <Box
+                textAlign={"center"}
+                display={"flex"}
+                gap={2}
+                justifyContent="center"
+              >
+                <Text>Don't have any acount?</Text>
+                <NavLink to="/partner/signup">
+                  <Text fontSize={"sm"} textColor={"tomato"}>
+                    Signup for Partner
+                  </Text>
+                </NavLink>
+              </Box>{" "}
+              <Box
+                textAlign={"center"}
+                display={"flex"}
+                gap={2}
+                justifyContent="center"
+              >
+                <Text>Not a Partner?</Text>
+                <NavLink to="/login">
+                  <Text fontSize={"sm"} textColor={"tomato"}>
+                    Login as User
+                  </Text>
+                </NavLink>
+              </Box>{" "}
+            </Box>
           </Box>
-        </Box>
-      </form>
+        </form>
+      </Layout>
     </Fragment>
   );
 };

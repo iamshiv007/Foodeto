@@ -20,7 +20,7 @@ const CategoryProducts = () => {
           fontWeight={"bold"}
           padding={"10px 20px"}
         >
-          Products - {category}
+          Products - {category ? category : "All"}
         </Text>
         <ProductList
           link={"/product"}
